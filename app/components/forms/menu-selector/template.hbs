@@ -1,0 +1,26 @@
+<div {{action "openMenu"}} class="menu-selector-selection-box">
+    <span class="menu-selector-selection">
+        {{#if titleCase}}
+            {{title-case selectedOption.title}}
+        {{else}}
+            {{selectedOption.title}}
+        {{/if}}
+    </span>
+    {{#if editorOpen}}
+        <i class="ii ii-chevron-up"></i>
+    {{else}}
+        <i class="ii ii-chevron-down"></i>
+    {{/if}}
+</div>
+{{#if editorOpen}}
+    <div class="menu-selector-options-background" {{action "closeMenu"}}> </div>
+    <div class="menu-selector-options">
+        {{#each innerOptions as |option| }}
+            {{forms/menu-selector/menu-option
+                option = option
+                titleCase = titleCase
+                selectedValue = selectedValue
+                selectedValueChanged = "selectedValueChanged"}}
+        {{/each}}
+    </div>
+{{/if}}

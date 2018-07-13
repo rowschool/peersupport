@@ -1,0 +1,114 @@
+<div class="verify-webrtc-stop-button">
+    <button id="button-stop" disabled={{STOP_GETSTATS}} {{action "stopGetStats"}}>Stop Camera & Get Stats</button>
+</div>
+
+<div>
+    {{forms/menu-selector
+      selectedValue = iceTransportPolicy
+      options = iceTransportPolicyOptions
+      changed = "iceTransportPolicyChanged"}}
+
+    {{forms/menu-selector
+      selectedValue = iceTransportLimitation
+      options = iceTransportLimitationOptions
+      changed = "iceTransportLimitationChanged"}}
+
+    {{forms/menu-selector
+      selectedValue = codec
+      options = codecOptions
+      changed = "codecChanged"}}
+</div>
+
+<table class="verify-webrtc-table">
+    <thead class="verify-webrtc-table-headers">
+        <th></th>
+        <th>First Peer</th>
+        <th>Second Peer</th>
+    </thead>
+
+    <tbody class="verify-webrtc-table-body">
+        <tr>
+            <td>
+                Videos
+            </td>
+            <td>
+                <video controls muted>{{answererToOfferer}}</video>
+            </td>
+            <td>
+                <video controls muted>{{offererToAnswerer}}</video>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Bandwidth Speed</td>
+            <td><span>{{bytes-to-size statsResult1.bandwidth.speed}}</span> per second</td>
+            <td><span>{{bytes-to-size statsResult2.bandwidth.speed}}</span> per second</td>
+        </tr>
+
+        <tr>
+            <td>STUN/TURN?</td>
+            <td>
+                <label>Local:</label> <span>{{statsResult1.connectionType.local.candidateType}}</span> (<span>{{localTransport1}}</span>)<br>
+                <label>Remote:</label> <span>{{statsResult1.connectionType.remote.candidateType}}</span> (<span>{{remoteTransport1}}</span>)<br>
+            </td>
+            <td>
+                <label>Local:</label> <span>{{statsResult2.connectionType.local.candidateType}}</span> (<span>{{localTransport2}}</span>)<br>
+                <label>Remote:</label> <span>{{statsResult2.connectionType.remote.candidateType}}</span> (<span>{{remoteTransport2}}</span>)<br>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Codecs</td>
+            <td>
+                <label>Send:</label> <span>{{codecsSend1}}</span><br>
+                <label>Recv:</label> <span>{{codecsRecv1}}</span><br>
+            </td>
+            <td>
+                <label>Send:</label> <span>{{codecsSend2}}</span><br>
+                <label>Recv:</label> <span>{{codecsRecv2}}</span><br>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Encryption</td>
+            <td><span>{{statsResult1.encryption}}</span></td>
+            <td><span>{{statsResult2.encryption}}</span></td>
+        </tr>
+
+        <tr>
+            <td>IP Address</td>
+            <td>
+                <label>Send:</label> <span>{{externalIPAddressLocal1}}</span><br>
+                <label>Recv:</label> <span>{{externalIPAddressRemote1}}</span>
+            </td>
+            <td>
+                <label>Send:</label> <span>{{externalIPAddressLocal2}}</span><br>
+                <label>Recv:</label> <span>{{externalIPAddressRemote2}}</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Resolutions</td>
+            <td>
+                <label>Send:</label> <span>{{statsResult1.resolutions.send.width}}x{{statsResult1.resolutions.send.height}}</span><br>
+                <label>Recv:</label> <span>{{statsResult1.resolutions.recv.width}}x{{statsResult1.resolutions.recv.height}}</span>
+            </td>
+            <td>
+                <label>Send:</label> <span>{{statsResult2.resolutions.send.width}}x{{statsResult2.resolutions.send.height}}</span><br>
+                <label>Recv:</label> <span>{{statsResult2.resolutions.recv.width}}x{{statsResult2.resolutions.recv.height}}</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Data</td>
+            <td>
+                <label>Send:</label> <span>{{totalDataForSenders1}}</span><br>
+                <label>Recv:</label> <span>{{totalDataForReceivers1}}</span>
+            </td>
+            <td>
+                <label>Send:</label> <span>{{totalDataForSenders2}}</span><br>
+                <label>Recv:</label> <span>{{totalDataForReceivers2}}</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
