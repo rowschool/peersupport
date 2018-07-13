@@ -84,11 +84,10 @@ export default Ember.Component.extend({
     // var offererToAnswerer = document.getElementById('peer1-to-peer2');
     // var answererToOfferer = document.getElementById('peer2-to-peer1');
 
-    //
-    // var mediaConstraints = {
-    //     OfferToReceiveAudio: true,
-    //     OfferToReceiveVideo: true
-    // };
+    mediaConstraints: {
+        OfferToReceiveAudio: true,
+        OfferToReceiveVideo: true
+    },
 
     /* offerer */
     offererPeer: function(video_stream) {
@@ -105,7 +104,7 @@ export default Ember.Component.extend({
             if(firedOnce) return;
             firedOnce = true;
 
-            offererToAnswerer.srcObject = event.streams[0];
+            this.set("offererToAnswerer", event.streams[0]);
 
             if (typeof window.InstallTrigger !== 'undefined') {
                 // NOTE: getStats is defined by get_stats_parser
@@ -148,7 +147,7 @@ export default Ember.Component.extend({
             if(firedOnce) return;
             firedOnce = true;
 
-            answererToOfferer.srcObject = event.streams[0];
+            this.set("answererToOfferer", event.streams[0]);
 
             if (typeof window.InstallTrigger !== 'undefined') {
                 getStats(answerer, event.streams[0].getTracks()[0], function(result) {
@@ -199,17 +198,6 @@ export default Ember.Component.extend({
 
         document.getElementById('btn-stop').disabled = false;
     });
-
-    // document.getElementById('btn-stop').onclick = function() {
-    //     this.disabled = true;
-    //     STOP_GETSTATS = true;
-    //
-    //     if(CAMERA_STREAM && CAMERA_STREAM.active === true) {
-    //         CAMERA_STREAM.getTracks().forEach(function(track) {
-    //             track.stop();
-    //         });
-    //     }
-    // };
     stopGetStats: function() {
         var CAMERA_STREAM = this.get("CAMERA_STREAM");
 
@@ -239,32 +227,12 @@ export default Ember.Component.extend({
             result.connectionType.remote.candidateType = 'STUN';
         }
 
-        // document.getElementById('peer' + peer.id + '-remoteIceType').innerHTML = result.connectionType.remote.candidateType;
-        // document.getElementById('peer' + peer.id + '-externalIPAddressRemote').innerHTML = result.connectionType.remote.ipAddress.join(', ');
-        // document.getElementById('peer' + peer.id + '-remoteTransport').innerHTML = result.connectionType.remote.transport.join(', ');
-
         if(result.connectionType.local.candidateType.indexOf('relayed') !== -1) {
             result.connectionType.local.candidateType = 'TURN';
         }
         else {
             result.connectionType.local.candidateType = 'STUN';
         }
-        // document.getElementById('peer' + peer.id + '-localIceType').innerHTML = result.connectionType.local.candidateType;
-        // document.getElementById('peer' + peer.id + '-externalIPAddressLocal').innerHTML = result.connectionType.local.ipAddress.join(', ');
-        // document.getElementById('peer' + peer.id + '-localTransport').innerHTML = result.connectionType.local.transport.join(', ');
-
-        // document.getElementById('peer' + peer.id + '-encryptedAs').innerHTML = result.encryption;
-
-        // document.getElementById('peer' + peer.id + '-videoResolutionsForSenders').innerHTML = result.resolutions.send.width + 'x' + result.resolutions.send.height;
-        // document.getElementById('peer' + peer.id + '-videoResolutionsForReceivers').innerHTML = result.resolutions.recv.width + 'x' + result.resolutions.recv.height;
-
-        // document.getElementById('peer' + peer.id + '-totalDataForSenders').innerHTML = bytesToSize(result.audio.bytesSent + result.video.bytesSent);
-        // document.getElementById('peer' + peer.id + '-totalDataForReceivers').innerHTML = bytesToSize(result.audio.bytesReceived + result.video.bytesReceived);
-
-        // document.getElementById('peer' + peer.id + '-codecsSend').innerHTML = result.audio.send.codecs.concat(result.video.send.codecs).join(', ');
-        // document.getElementById('peer' + peer.id + '-codecsRecv').innerHTML = result.audio.recv.codecs.concat(result.video.recv.codecs).join(', ');
-
-        // document.getElementById('peer' + peer.id + '-bandwidthSpeed').innerHTML = bytesToSize(result.bandwidth.speed);
 
         if (result.ended === true) {
             result.nomore();
