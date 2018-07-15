@@ -84,6 +84,7 @@ export default Ember.Component.extend({
         var iceServers = this.get("iceServers");
         var mediaConstraints = this.get("mediaConstraints");
         var offerer = new RTCPeerConnection(iceServers);
+        var codec = this.get("codec");
         offerer.id = 1;
         var that = this;
 
@@ -101,19 +102,19 @@ export default Ember.Component.extend({
 
             if (typeof window.InstallTrigger !== 'undefined') {
                 getStats(offerer, event.streams[0].getTracks()[0], function(result) {
-                    previewGetStatsResult(offerer, result);
+                    that.previewGetStatsResult(offerer, result);
                 }, 1000);
             }
             else {
                 getStats(offerer, function(result) {
-                    previewGetStatsResult(offerer, result);
+                    that.previewGetStatsResult(offerer, result);
                 }, 1000);
             }
         };
 
         offerer.onicecandidate = function (event) {
             if (!event || !event.candidate) return;
-            addIceCandidate(answerer, event.candidate);
+            that.addIceCandidate(answerer, event.candidate);
         };
 
         offerer.createOffer(mediaConstraints).then(function (offer) {
@@ -122,14 +123,13 @@ export default Ember.Component.extend({
                 that.answererPeer(offer, video_stream);
             }, function() {});
         }, function() {});
-
-        that.set("offerer", offerer);
     },
     /* answerer */
     answererPeer: function(offer, video_stream) {
         var iceServers = this.get("iceServers");
         var mediaConstraints = this.get("mediaConstraints");
         var answerer = new RTCPeerConnection(iceServers);
+        var codec = this.get("codec");
         answerer.id = 2;
         var that = this;
 
@@ -147,19 +147,19 @@ export default Ember.Component.extend({
 
             if (typeof window.InstallTrigger !== 'undefined') {
                 getStats(answerer, event.streams[0].getTracks()[0], function(result) {
-                    previewGetStatsResult(answerer, result);
+                    that.previewGetStatsResult(answerer, result);
                 }, 1000);
             }
             else {
                 getStats(answerer, function(result) {
-                    previewGetStatsResult(answerer, result);
+                    that.previewGetStatsResult(answerer, result);
                 }, 1000);
             }
         };
 
         answerer.onicecandidate = function (event) {
             if (!event || !event.candidate) return;
-            addIceCandidate(offerer, event.candidate);
+            that.addIceCandidate(offerer, event.candidate);
         };
 
         answerer.setRemoteDescription(offer);
@@ -172,50 +172,51 @@ export default Ember.Component.extend({
     },
 
     previewGetStatsResult: function(peer, result) {
-            if(STOP_GETSTATS) {
-                result.nomore();
-                return;
-            }
+        var STOP_GETSTATS = this.get("STOP_GETSTATS");
+        if(STOP_GETSTATS) {
+            result.nomore();
+            return;
+        }
 
-            if(result.connectionType.remote.candidateType.indexOf('relayed') !== -1) {
-                result.connectionType.remote.candidateType = 'TURN';
-            }
-            else {
-                result.connectionType.remote.candidateType = 'STUN';
-            }
+        if(result.connectionType.remote.candidateType.indexOf('relayed') !== -1) {
+            result.connectionType.remote.candidateType = 'TURN';
+        }
+        else {
+            result.connectionType.remote.candidateType = 'STUN';
+        }
 
-            document.getElementById('peer' + peer.id + '-remoteIceType').innerHTML = result.connectionType.remote.candidateType;
-            document.getElementById('peer' + peer.id + '-externalIPAddressRemote').innerHTML = result.connectionType.remote.ipAddress.join(', ');
-            document.getElementById('peer' + peer.id + '-remoteTransport').innerHTML = result.connectionType.remote.transport.join(', ');
+        document.getElementById('peer' + peer.id + '-remoteIceType').innerHTML = result.connectionType.remote.candidateType;
+        document.getElementById('peer' + peer.id + '-externalIPAddressRemote').innerHTML = result.connectionType.remote.ipAddress.join(', ');
+        document.getElementById('peer' + peer.id + '-remoteTransport').innerHTML = result.connectionType.remote.transport.join(', ');
 
-            if(result.connectionType.local.candidateType.indexOf('relayed') !== -1) {
-                result.connectionType.local.candidateType = 'TURN';
-            }
-            else {
-                result.connectionType.local.candidateType = 'STUN';
-            }
-            document.getElementById('peer' + peer.id + '-localIceType').innerHTML = result.connectionType.local.candidateType;
-            document.getElementById('peer' + peer.id + '-externalIPAddressLocal').innerHTML = result.connectionType.local.ipAddress.join(', ');
-            document.getElementById('peer' + peer.id + '-localTransport').innerHTML = result.connectionType.local.transport.join(', ');
+        if(result.connectionType.local.candidateType.indexOf('relayed') !== -1) {
+            result.connectionType.local.candidateType = 'TURN';
+        }
+        else {
+            result.connectionType.local.candidateType = 'STUN';
+        }
+        document.getElementById('peer' + peer.id + '-localIceType').innerHTML = result.connectionType.local.candidateType;
+        document.getElementById('peer' + peer.id + '-externalIPAddressLocal').innerHTML = result.connectionType.local.ipAddress.join(', ');
+        document.getElementById('peer' + peer.id + '-localTransport').innerHTML = result.connectionType.local.transport.join(', ');
 
-            document.getElementById('peer' + peer.id + '-encryptedAs').innerHTML = result.encryption;
+        document.getElementById('peer' + peer.id + '-encryptedAs').innerHTML = result.encryption;
 
-            document.getElementById('peer' + peer.id + '-videoResolutionsForSenders').innerHTML = result.resolutions.send.width + 'x' + result.resolutions.send.height;
-            document.getElementById('peer' + peer.id + '-videoResolutionsForReceivers').innerHTML = result.resolutions.recv.width + 'x' + result.resolutions.recv.height;
+        document.getElementById('peer' + peer.id + '-videoResolutionsForSenders').innerHTML = result.resolutions.send.width + 'x' + result.resolutions.send.height;
+        document.getElementById('peer' + peer.id + '-videoResolutionsForReceivers').innerHTML = result.resolutions.recv.width + 'x' + result.resolutions.recv.height;
 
-            document.getElementById('peer' + peer.id + '-totalDataForSenders').innerHTML = bytesToSize(result.audio.bytesSent + result.video.bytesSent);
-            document.getElementById('peer' + peer.id + '-totalDataForReceivers').innerHTML = bytesToSize(result.audio.bytesReceived + result.video.bytesReceived);
+        document.getElementById('peer' + peer.id + '-totalDataForSenders').innerHTML = bytesToSize(result.audio.bytesSent + result.video.bytesSent);
+        document.getElementById('peer' + peer.id + '-totalDataForReceivers').innerHTML = bytesToSize(result.audio.bytesReceived + result.video.bytesReceived);
 
-            document.getElementById('peer' + peer.id + '-codecsSend').innerHTML = result.audio.send.codecs.concat(result.video.send.codecs).join(', ');
-            document.getElementById('peer' + peer.id + '-codecsRecv').innerHTML = result.audio.recv.codecs.concat(result.video.recv.codecs).join(', ');
+        document.getElementById('peer' + peer.id + '-codecsSend').innerHTML = result.audio.send.codecs.concat(result.video.send.codecs).join(', ');
+        document.getElementById('peer' + peer.id + '-codecsRecv').innerHTML = result.audio.recv.codecs.concat(result.video.recv.codecs).join(', ');
 
-            document.getElementById('peer' + peer.id + '-bandwidthSpeed').innerHTML = bytesToSize(result.bandwidth.speed);
+        document.getElementById('peer' + peer.id + '-bandwidthSpeed').innerHTML = bytesToSize(result.bandwidth.speed);
 
-            if (result.ended === true) {
-                result.nomore();
-            }
+        if (result.ended === true) {
+            result.nomore();
+        }
 
-            window.getStatsResult = result;
+        window.getStatsResult = result;
     },
     addIceCandidate: function(peer, candidate) {
         var iceTransportLimitation = this.get("iceTransportLimitation");
@@ -232,6 +233,7 @@ export default Ember.Component.extend({
     actions: {
         iceTransportPolicyChanged: function(value) {
             this.set("iceTransportPolicy", value);
+            // TODO: set model values when this action is triggered
         },
         iceTransportLimitationChanged: function(value) {
             this.set("iceTransportLimitation", value);
