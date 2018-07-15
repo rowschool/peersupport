@@ -1,4 +1,4 @@
-window.getStats = function(mediaStreamTrack, callback, interval) {
+var getStats = function(mediaStreamTrack, callback, interval) {
     var RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
 
     if (typeof MediaStreamTrack === 'undefined') {
@@ -106,8 +106,9 @@ window.getStats = function(mediaStreamTrack, callback, interval) {
                 cb(items);
             });
         }
-    };
+    }
 
     getStatsLooper();
-
 };
+
+export default getStats;
