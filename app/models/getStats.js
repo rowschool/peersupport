@@ -1,8 +1,12 @@
-import { getStatsResult } from "peersupport/models/get_stats_result";
-
-// var rtcPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
-
 window.getStats = function(mediaStreamTrack, callback, interval) {
+    var RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+
+    if (typeof MediaStreamTrack === 'undefined') {
+        MediaStreamTrack = {}; // todo?
+    }
+
+    var systemNetworkType = ((navigator.connection || {}).type || 'unknown').toString().toLowerCase();
+
     var peer = this;
 
     if (arguments[0] instanceof RTCPeerConnection) {
@@ -20,23 +24,18 @@ window.getStats = function(mediaStreamTrack, callback, interval) {
     } else if (!(mediaStreamTrack instanceof MediaStreamTrack) && !!navigator.mozGetUserMedia) {
         throw '1st argument is not instance of MediaStreamTrack.';
     }
-
     var nomore = false;
 
     function getStatsLooper() {
         getStatsWrapper(function(results) {
             results.forEach(function(result) {
-                // TODO: Call all functions in separate method...
-                // Object.keys(getStatsParser).forEach(function(key) {
-                //     if (typeof getStatsParser[key] === 'function') {
-                        // getStatsParser[key](result);
-                    // }
-                // });
-                // NOTE:
-                // StatsParser.parseStats(result);
+                Object.keys(getStatsParser).forEach(function(key) {
+                    if (typeof getStatsParser[key] === 'function') {
+                        getStatsParser[key](result);
+                    }
+                });
 
-                if (result.type !== 'local-candidate' && result.type !== 'remote-candidate' &&
-                    result.type !== 'candidate-pair') {
+                if (result.type !== 'local-candidate' && result.type !== 'remote-candidate' && result.type !== 'candidate-pair') {
                     // console.error('result', result);
                 }
             });
@@ -61,10 +60,7 @@ window.getStats = function(mediaStreamTrack, callback, interval) {
             getStatsResult.results = results;
 
             if (getStatsResult.audio && getStatsResult.video) {
-                getStatsResult.bandwidth.speed =
-                (getStatsResult.audio.bytesSent - getStatsResult.bandwidth.helper.audioBytesSent) +
-                (getStatsResult.video.bytesSent - getStatsResult.bandwidth.helper.videoBytesSent);
-
+                getStatsResult.bandwidth.speed = (getStatsResult.audio.bytesSent - getStatsResult.bandwidth.helper.audioBytesSent) + (getStatsResult.video.bytesSent - getStatsResult.bandwidth.helper.videoBytesSent);
                 getStatsResult.bandwidth.helper.audioBytesSent = getStatsResult.audio.bytesSent;
                 getStatsResult.bandwidth.helper.videoBytesSent = getStatsResult.video.bytesSent;
             }
@@ -77,7 +73,6 @@ window.getStats = function(mediaStreamTrack, callback, interval) {
             }
         });
     }
-
     // a wrapper around getStats which hides the differences (where possible)
     // following code-snippet is taken from somewhere on the github
     function getStatsWrapper(cb) {
@@ -111,7 +106,7 @@ window.getStats = function(mediaStreamTrack, callback, interval) {
                 cb(items);
             });
         }
-    }
+    };
 
     getStatsLooper();
 
