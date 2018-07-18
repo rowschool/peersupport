@@ -1,3 +1,5 @@
+var systemNetworkType = ((navigator.connection || {}).type || 'unknown').toString().toLowerCase();
+
 // This is defined as a global in the original code.
 var getStatsResult = {
     encryption: 'sha-256',
@@ -81,9 +83,9 @@ var getStatsResult = {
         },
         candidates: {}
     },
-    nomore: function() {
-        nomore = true;
-    }
+    // nomore: function() {
+    //     nomore = true;
+    // }
 };
 
 // This is defined as a global in the original code.
@@ -153,15 +155,15 @@ getStatsParser.candidatePair = function(result) {
         }
     }
 
-    if (result.type === 'candidate-pair') {
-        if (result.selected === true && result.nominated === true && result.state === 'succeeded') {
+    // if (result.type === 'candidate-pair') {
+    //     if (result.selected === true && result.nominated === true && result.state === 'succeeded') {
             // remoteCandidateId, localCandidateId, componentId
-            var localCandidate = getStatsResult.internal.candidates[result.remoteCandidateId];
-            var remoteCandidate = getStatsResult.internal.candidates[result.remoteCandidateId];
+            // var localCandidate = getStatsResult.internal.candidates[result.remoteCandidateId];
+            // var remoteCandidate = getStatsResult.internal.candidates[result.remoteCandidateId];
 
             // Firefox used above two pairs for connection
-        }
-    }
+    //     }
+    // }
 };
 
 getStatsParser.datachannel = function(result) {

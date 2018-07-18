@@ -1,11 +1,7 @@
 var getStats = function(mediaStreamTrack, callback, interval) {
-    var RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
-
-    if (typeof MediaStreamTrack === 'undefined') {
-        MediaStreamTrack = {}; // todo?
-    }
-
-    var systemNetworkType = ((navigator.connection || {}).type || 'unknown').toString().toLowerCase();
+    // if (typeof MediaStreamTrack === 'undefined') {
+    //     MediaStreamTrack = {}; // todo?
+    // }
 
     var peer = this;
 

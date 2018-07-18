@@ -144,6 +144,9 @@ export default Ember.Component.extend({
         },
         codecChanged: function(value) {
             this.set("codec", value);
+        },
+        stopGetStats: function() {
+            this.set("STOP_GETSTATS", true);
         }
     }
 });

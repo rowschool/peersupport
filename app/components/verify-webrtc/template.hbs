@@ -48,12 +48,12 @@
         <tr>
             <td>STUN/TURN?</td>
             <td>
-                <label>Local:</label> <span>{{statsResult1.connectionType.local.candidateType}}</span> (<span>{{localTransport1}}</span>)<br>
-                <label>Remote:</label> <span>{{statsResult1.connectionType.remote.candidateType}}</span> (<span>{{remoteTransport1}}</span>)<br>
+                <label>Local:</label> <span>{{offerer.localCandidateType}}</span> (<span>{{localTransport1}}</span>)<br>
+                <label>Remote:</label> <span>{{offerer.remoteCandidateType}}</span> (<span>{{remoteTransport1}}</span>)<br>
             </td>
             <td>
-                <label>Local:</label> <span>{{statsResult2.connectionType.local.candidateType}}</span> (<span>{{localTransport2}}</span>)<br>
-                <label>Remote:</label> <span>{{statsResult2.connectionType.remote.candidateType}}</span> (<span>{{remoteTransport2}}</span>)<br>
+                <label>Local:</label> <span>{{answerer.localCandidateType}}</span> (<span>{{localTransport2}}</span>)<br>
+                <label>Remote:</label> <span>{{answerer.remoteCandidateType}}</span> (<span>{{remoteTransport2}}</span>)<br>
             </td>
         </tr>
 
