@@ -1,22 +1,13 @@
 import Ember from "ember";
 
 export default Ember.Component.extend({
+    isUsersContainerVisible: false,
+    numberOfUsers: 1,
 
+    actions: {
+        selectUsersList: function() {
+            this.toggleProperty("isUsersContainerVisible");
+            this.set("isUsersContainerVisible", true);
+        }
+    }
 });
-
-// var usersList = getElement('.users-list');
-// var numbersOfUsers = getElement('.numbers-of-users');
-//
-// numbersOfUsers.innerHTML = 1;
-//
-// var usersContainer = getElement('.users-container');
-//
-// usersList.onclick = function() {
-//     if (usersList.className.indexOf('selected') != -1) {
-//         usersList.className = usersList.className.replace( / selected/g , '');
-//         usersContainer.style.display = 'none';
-//     } else {
-//         usersList.className += ' selected';
-//         usersContainer.style.display = 'block';
-//     }
-// };
