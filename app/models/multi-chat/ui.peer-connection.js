@@ -1,7 +1,3 @@
-// Muaz Khan         - www.MuazKhan.com
-// MIT License       - www.WebRTC-Experiment.com/licence
-// Experiments       - github.com/muaz-khan/WebRTC-Experiment
-
 var rtcMultiConnection = new RTCMultiConnection();
 
 rtcMultiConnection.session = { data: true };
@@ -43,7 +39,7 @@ rtcMultiConnection.openSignalingChannel = function(config) {
                         websocket.send(data);
                     }, 1000);
         }
-                
+
         websocket.push(JSON.stringify({
             data: data,
             channel: config.channel
@@ -63,10 +59,10 @@ rtcMultiConnection.session.data = true;
 rtcMultiConnection.autoTranslateText = false;
 
 rtcMultiConnection.onopen = function(e) {
-    getElement('#allow-webcam').disabled = false;
-    getElement('#allow-mic').disabled = false;
-    getElement('#share-files').disabled = false;
-    getElement('#allow-screen').disabled = false;
+    // getElement('#allow-webcam').disabled = false;
+    // getElement('#allow-mic').disabled = false;
+    // getElement('#share-files').disabled = false;
+    // getElement('#allow-screen').disabled = false;
 
     addNewMessage({
         header: e.extra.username,
@@ -162,7 +158,7 @@ rtcMultiConnection.onCustomMessage = function(message) {
                                 session: session,
                                 stream: stream
                             }
-                        
+
                             rtcMultiConnection.peers[message.userid].peer.connection.addStream(stream);
                             div.querySelector('#preview').onclick();
                         }, session);
@@ -176,7 +172,7 @@ rtcMultiConnection.onCustomMessage = function(message) {
                                 session: session,
                                 stream: stream
                             }
-                            
+
                             rtcMultiConnection.peers[message.userid].peer.connection.addStream(stream);
                             div.querySelector('#preview').onclick();
                         }, session);
@@ -213,7 +209,7 @@ rtcMultiConnection.onCustomMessage = function(message) {
                             session: session,
                             stream: stream
                         }
-                        
+
                         rtcMultiConnection.peers[message.userid].peer.connection.addStream(stream);
                         div.querySelector('#listen').onclick();
                     }, session);

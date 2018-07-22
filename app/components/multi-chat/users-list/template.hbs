@@ -10,10 +10,10 @@
   <p id="who-is-typing"></p>
 
   <div class="controls">
-    <button id="allow-webcam" class="icon" disabled title="Enable Your Webcam"></button>
-    <button id="allow-mic" class="icon" disabled title="Enable Your Microphone"></button>
-    <button id="allow-screen" class="icon" disabled title="Enable Your Screen"></button>
-    <button id="share-files" class="icon" disabled title="Select and Share Your Files"></button>
+    <i class="ii ii-webcam" {{action "toggleWebcam"}} disabled={{isWebcamDisabled}} title="Enable your webcam"></i>
+    <i class="ii ii-microphone" {{action "toggleMic"}} disabled={{isMicDisabled}} title="Enable your microphone"></i>
+    <i class="ii ii-monitor-multiple" {{action "toggleScreenSharing"}} disabled={{isScreenSharingDisabled}} title="Enable your screen"></i>
+    <i class="ii ii-file-send" {{action "toggleFileSharing"}} disabled={{isFileSharingDisabled}} title="Select and share your files"></i>
   </div>
 </div>
 
@@ -28,11 +28,6 @@
     </div>
 
     <div class="user-activity">
-    <!-- <div style="float:right;">
-    MultiRTC is open-sourced <a href="https://github.com/muaz-khan/MultiRTC">here</a>!
-    </div> -->
-
-    <!-- <h2 class="header">Welcome Sir!</h2> -->
       <p class="message">
         Please Enter a <span style="color:red;">UNIQUE</span> room-name:
         <input type="text" id="room-name" placeholder="Private Room-ID" style="border: 1px solid rgb(253, 253, 253);box-shadow: inset 0 0 0 1px rgb(53, 52, 52);outline: 1px solid rgb(7, 7, 7);" title="Your private rooms unique-id. It is required!"><br />
@@ -47,48 +42,13 @@
     </div>
   </div>
 
-  <!-- <div class="new-message" style="overflow: hidden;height: 300px;">
-  <div class="user-info" style="height: 100%">
-  <img src="images/help.png">
+  <div class="new-message" style="overflow: hidden;height: 300px;">
+    <div class="user-info" style="height: 100%">
+      <img src="images/help.png">
+    </div>
+
+    <div class="user-activity">
+      <p class="message"></p>
+    </div>
   </div>
-
-  <div class="user-activity">
-  <h2 class="header">What is <a href="https://github.com/muaz-khan/MultiRTC">MultiRTC</a>?</h2>
-  <p class="message">
-  <ol style="margin-left:2em;">
-  <li>
-  It is a skype-like demo using WebRTC for realtime connections!
-  </li>
-
-  <li>
-  It allows you enable/disable webcams; and join with or without webcams!
-  </li>
-
-  <li>
-  It allows you share screen using existing peer connections!
-  </li>
-
-  <li>
-  It allows you share files with preview and download links!
-  </li>
-
-  <li>
-  It allows you <span style="color:red;">auto translate incoming messages</span> in your <a href="http://www.rtcmulticonnection.org/docs/language/">own language</a>!
-  </li>
-
-  <li>
-  It gives you full control over bandwidth and screen resolutions!
-  </li>
-
-  <li>
-  It allows you adjust file sharing speed yourself by setting <a href="http://www.rtcmulticonnection.org/docs/chunkSize/">chunk-size</a> and <a href="http://www.rtcmulticonnection.org/docs/chunkInterval/">chunk-intervals</a>!
-  </li>
-
-  <li>
-  It allows you test all WebRTC features by enabling/disabling some check-boxes!
-  </li>
-  </ol>
-  </p>
-  </div>
-  </div> -->
 </div>

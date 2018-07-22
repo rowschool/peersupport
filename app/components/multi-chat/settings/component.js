@@ -1,7 +1,15 @@
 import Ember from "ember";
+import Languages from "peersupport/static/languages";
 
 export default Ember.Component.extend({
+    selectedLanguage: "en",
+    languageOptions: Languages,
 
+    actions: {
+        selectedLanguageChanged: function(value) {
+            this.set("selectedLanguage", value);
+        }
+    }
 });
 
 // NOTE: Settings
