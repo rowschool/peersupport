@@ -8,6 +8,7 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
     this.route("verify", function() {});
+    this.route("multi-chat", function() {});
 });
 
 export default Router;
