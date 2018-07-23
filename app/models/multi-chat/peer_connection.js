@@ -262,3 +262,5 @@ rtcMultiConnection.onclose = rtcMultiConnection.onleave = function(event) {
         color: event.extra.color
     });
 };
+
+export default rtcMultiConnection;

@@ -51,6 +51,7 @@ export default Ember.Component.extend({
 //         args.callback(newMessageDIV);
 //     }
 //
+//     TODO: Fix this sound. It's in the message-sound component.
 //     document.querySelector('#message-sound').play();
 // }
 //

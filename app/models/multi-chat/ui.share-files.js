@@ -1,7 +1,3 @@
-// Muaz Khan         - www.MuazKhan.com
-// MIT License       - www.WebRTC-Experiment.com/licence
-// Experiments       - github.com/muaz-khan/WebRTC-Experiment
-
 // file sharing
 var progressHelper = { };
 rtcMultiConnection.onFileStart = function(file) {
