@@ -3,7 +3,17 @@ import Translations from "peersupport/models/translations/en-us";
 
 export function t(params) {
     var translations = Translations;
-    return translations[Object.keys(translations)[0]][params[0].split(".")[1]];
+    var splitKey = params[0].split(".");
+
+    while (splitKey.length) {
+        if (typeof translations !== "object") {
+            return undefined;
+        }
+
+        translations = translations[splitKey.shift()];
+    }
+
+    return translations;
 }
 
 export default Ember.Helper.helper(t);

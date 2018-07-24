@@ -1,30 +1,54 @@
-<h2 id="title">ember-webrtc-devices</h2>
+<div class="ps-device-list">
+  <p class="ps-device-list-header-text">
+    This dummy page will request user media, in order to access names of devices, <br />
+    then will re-enumerate devices and populate the select boxes.
+  </p>
 
-<p>This dummy page will request user media, in order to access names of devices,
-  then will re-enumerate devices and populate the select boxes.</p>
+  <ul class="ps-device-list-capabilities">
+    <li>
+      <span class="ps-device-list-capabilities-item-label">{{title-case "audioCallCapable"}}:</span>
+      <span class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.audioCallCapable}}</span>
+    </li>
+    <li>
+      <span class="ps-device-list-capabilities-item-label">{{title-case "videoCallCapable"}}:</span>
+      <span class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.videoCallCapable}}</span>
+    </li>
+    <li>
+      <span class="ps-device-list-capabilities-item-label">{{title-case "callCapable"}}:</span>
+      <span class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.callCapable}}</span>
+    </li>
+    <li>
+      <span class="ps-device-list-capabilities-item-label">{{title-case "hasMicPermission"}}:</span>
+      <span class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.hasMicPermission}}</span>
+    </li>
+    <li>
+      <span class="ps-device-list-capabilities-item-label">{{title-case "hasMicrophone"}}:</span>
+      <span class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.hasMicrophone}}</span>
+    </li>
+    <li>
+      <span class="ps-device-list-capabilities-item-label">{{title-case "hasCameraPermission"}}:</span>
+      <span class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.hasCameraPermission}}</span>
+    </li>
+    <li>
+      <span class="ps-device-list-capabilities-item-label">{{title-case "hasCamera"}}:</span>
+      <span class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.hasCamera}}</span>
+    </li>
+    <li>
+      <span class="ps-device-list-capabilities-item-label">{{title-case "canListDevices"}}:</span>
+      <span class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.canListDevices}}</span>
+    </li>
+  </ul>
 
-<ul>
-  <li>audioCallCapable: {{webrtc.audioCallCapable}}</li>
-  <li>videoCallCapable: {{webrtc.videoCallCapable}}</li>
-  <li>callCapable: {{webrtc.callCapable}}</li>
-  <li>hasMicPermission: {{webrtc.hasMicPermission}}</li>
-  <li>hasMicrophone: {{webrtc.hasMicrophone}}</li>
-  <li>hasCameraPermission: {{webrtc.hasCameraPermission}}</li>
-  <li>hasCamera: {{webrtc.hasCamera}}</li>
-  <li>canListDevices: {{webrtc.canListDevices}}</li>
-</ul>
+  {{device-selection}}
 
-<h3>Default</h3>
-{{device-selection}}
+  {{!-- <h3>With Troubleshoot link</h3> --}}
+  {{!-- {{device-selection openTroubleshoot="openTroubleshoot"}} --}}
 
+  {{!-- <h3>No audio</h3> --}}
+  {{!-- {{device-selection audio=false}} --}}
 
-<h3>With Troubleshoot link</h3>
-{{!-- {{device-selection openTroubleshoot="openTroubleshoot"}} --}}
-
-<h3>No audio</h3>
-{{!-- {{device-selection audio=false}} --}}
-
-<h3>No video</h3>
-{{!-- {{device-selection video=false}} --}}
+  {{!-- <h3>No video</h3> --}}
+  {{!-- {{device-selection video=false}} --}}
+</div>
 
 {{outlet}}

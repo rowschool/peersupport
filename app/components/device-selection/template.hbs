@@ -1,121 +1,80 @@
-<div class="options">
-    {{#if webrtc.canListDevices}}
-        {{#if (and webrtc.cameraList.length video)}}
-            <div class="entry-row">
-                <div class="entry-label">
-                    <label for="{{concat elementId '-camera-select'}}">
-                        <span class="sr-only">
-                            {{t "webrtcDevices.videoSource"}}
-                        </span>
-                        <i class="pc-moon pc-video" title="{{t "webrtcDevices.cameraSelect"}}"></i>
-                    </label>
-                </div>
-                <div class="entry-values">
-                    {{#if webrtc.hasCamera}}
-                      {{forms/menu-selector
-                        selectedValue = selectedCamera
-                        valueField = "deviceId"
-                        options = webrtc.cameraList
-                        changed = "changeCamera"}}
-                    {{else}}
-                        <span>{{t "webrtcDevices.noCameraDetected"}}</span>
-                    {{/if}}
-                </div>
-            </div>
-            {{#if advancedOptions}}
-                <div class="entry-row">
-                    <div class="entry-label">
-                        <label for="{{concat elementId '-filter-select'}}">
-                            <i class="pc pc-picture"></i>
-                        </label>
-                    </div>
-                    <div class="entry-values">
-                        {{forms/menu-selector
-                            selectedValue = selectedFilter
-                            options = advancedOptions
-                            changed = "changeFilter"}}
-                    </div>
-                </div>
-            {{/if}}
-        {{/if}}
-        {{#if (and webrtc.microphoneList.length audio)}}
-            <div class="entry-row">
-                <div class="entry-label">
-                    <label for="{{concat elementId '-microphone-select'}}">
-                        <span class="sr-only">
-                            {{t "webrtcDevices.audioSource"}}
-                        </span>
-                        <i class="pc-moon pc-microphone" title="{{t "webrtcDevices.microphoneSelect"}}"></i>
-                    </label>
-                </div>
-                <div class="entry-values">
-                    {{#if webrtc.hasMicrophone}}
-                        {{forms/menu-selector
-                            selectedValue = selectedMicrophone
-                            valueField = "deviceId"
-                            options = webrtc.microphoneList
-                            changed = "changeMicrophone"}}
-                    {{else}}
-                        <span>{{t "webrtcDevices.noMicrophoneDetected"}}</span>
-                    {{/if}}
-                </div>
-            </div>
-        {{/if}}
-        {{#if showResolutionPicker}}
-            <div class="entry-row">
-                <div class="entry-label">
-                    <label for="{{concat elementId '-resolution-select'}}">
-                        <span class="sr-only">
-                            {{t "webrtcDevices.resolution"}}
-                        </span>
-                        <i class="pc pc-signal" title="{{t "webrtcDevices.resolutionSelect"}}"></i>
-                    </label>
-                </div>
-                <div class="entry-values">
-                    {{log "resolutionList" webrtc.resolutionList}}
-                    {{forms/menu-selector
-                        selectedValue = selectedResolution
-                        valueField = "presetId"
-                        options = webrtc.resolutionList
-                        changed = "changeResolution"}}
-                </div>
-            </div>
-        {{/if}}
+<span class="ps-device-selection-header">Device Selection</span>
+
+{{#if webrtc.canListDevices}}
+  {{#if (and webrtc.cameraList.length video)}}
+    <div class="ps-device-selection-item">
+      <span class="ps-device-selection-label">{{t "webrtcDevices.videoSource"}}</span>
+
+      {{#if webrtc.hasCamera}}
+        {{forms/menu-selector
+          selectedValue = selectedCamera
+          valueField = "deviceId"
+          options = webrtc.cameraList
+          changed = "changeCamera"}}
+      {{else}}
+        <span class="ps-device-selection-label">{{t "webrtcDevices.noCameraDetected"}}</span>
+      {{/if}}
+
+      {{#if advancedOptions}}
+        {{forms/menu-selector
+            selectedValue = selectedFilter
+            options = advancedOptions
+            changed = "changeFilter"}}
+      {{/if}}
+    </div>
+  {{/if}}
+
+  {{#if (and webrtc.microphoneList.length audio)}}
+    <div class="ps-device-selection-item">
+      <span class="ps-device-selection-label">{{t "webrtcDevices.audioSource"}}</span>
+
+      {{#if webrtc.hasMicrophone}}
+        {{forms/menu-selector
+            selectedValue = selectedMicrophone
+            valueField = "deviceId"
+            options = webrtc.microphoneList
+            changed = "changeMicrophone"}}
+      {{else}}
+        <span class="ps-device-selection-label">{{t "webrtcDevices.noMicrophoneDetected"}}</span>
+      {{/if}}
+    </div>
+  {{/if}}
+
+  {{#if showResolutionPicker}}
+    <div class="ps-device-selection-item">
+      <span class="ps-device-selection-label">{{t "webrtcDevices.resolution"}}</span>
+
+      {{forms/menu-selector
+          selectedValue = selectedResolution
+          valueField = "presetId"
+          options = webrtc.resolutionList
+          changed = "changeResolution"}}
+    </div>
+  {{/if}}
+{{else}}
+  <span class="ps-device-selection-label">
+    {{t "webrtcDevices.browserMediaSettings"}}
+  </span>
+{{/if}}
+
+{{#if showOutputDevicePicker}}
+  <div class="ps-device-selection-item">
+    <span class="ps-device-selection-label">{{t "webrtcDevices.audioDestination"}}</span>
+
+    {{#if webrtc.outputDeviceList.length}}
+      {{forms/menu-selector
+          selectedValue = selectedOutputDevice
+          valueField = "deviceId"
+          options = webrtc.outputDeviceList
+          changed = "changeOutputDevice"}}
     {{else}}
-        <div class="browser-settings-message">
-            {{t "webrtcDevices.browserMediaSettings"}}
-        </div>
+      <span class="ps-device-selection-label">{{t "webrtcDevices.outputDeviceSystemDefault"}}</span>
     {{/if}}
-    {{#if showOutputDevicePicker}}
-        <div class="entry-row">
-            <div class="entry-label audio-selection">
-                <label for="{{concat elementId '-outputDevice-select'}}">
-                    <span class="sr-only">
-                        {{t "webrtcDevices.audioDestination"}}
-                    </span>
-                    <i class="pc pc-speakers" title="{{t "webrtcDevices.outputSelect"}}"></i>
-                </label>
-            </div>
-            <div class="entry-values">
-                {{#if webrtc.outputDeviceList.length}}
-                    {{forms/menu-selector
-                        selectedValue = selectedOutputDevice
-                        valueField = "deviceId"
-                        options = webrtc.outputDeviceList
-                        changed = "changeOutputDevice"}}
-                {{else}}
-                  <span class="system-default-message">{{t "webrtcDevices.outputDeviceSystemDefault"}}</span>
-                {{/if}}
-            </div>
-        </div>
-    {{/if}}
-    {{#if showTroubleshoot}}
-        <div class="entry-row troubleshoot">
-            <div class="entry-values">
-                <button type="button" class="btn btn-link troubleshoot-link" {{action "openTroubleshoot"}}>
-                    {{t "webrtcDevices.troubleshoot"}}
-                </button>
-            </div>
-        </div>
-    {{/if}}
-</div>
+  </div>
+{{/if}}
+
+{{#if showTroubleshoot}}
+  <button type="button" class="btn btn-link troubleshoot-link" {{action "openTroubleshoot"}}>
+    {{t "webrtcDevices.troubleshoot"}}
+  </button>
+{{/if}}

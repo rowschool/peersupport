@@ -161,7 +161,7 @@ export default Mixin.create(Ember.Evented, {
         }
       }));
     }
-    console.log("resolutions", resolutions);
+
     this.set('resolutionList', resolutions);
     return resolutions;
   },
@@ -254,7 +254,6 @@ export default Mixin.create(Ember.Evented, {
             groupId: (device.deviceId && device.deviceId.toLowerCase() === 'default') ? null : device.groupId
           };
           const hasLabel = !_.isEmpty(device.label);
-          // const hasLabel = true;
 
           if (device.kind === 'audioinput') {
             addMicrophone(deviceInfo, hasLabel);
@@ -266,7 +265,6 @@ export default Mixin.create(Ember.Evented, {
         });
       }
 
-      // console.log("cameras", cameras);
       this.setProperties({
         cameraList: Ember.A(cameras),
         microphoneList: Ember.A(microphones),

@@ -5,20 +5,10 @@ import layout from './template';
 const {computed, Component, inject, run} = Ember;
 
 export default Component.extend(/* LoggerMixin, */{
+  classNames: ["ps-device-selection"],
   layout: layout,
-  classNameBindings: [':device-selection'],
 
-  selectedCamera: Ember.computed("webrtc.cameraList.firstObject", {
-      get: function() {
-          // console.log("selectedCamera", this.get("webrtc.cameraList.firstObject"));
-          return this.get("webrtc.cameraList.firstObject");
-      },
-      set: function(key, value) {
-          // console.trace("value", value);
-          return value;
-          // debugger;
-      }
-  }),
+  selectedCamera: null,
   selectedMicrophone: null,
   selectedResolution: null,
   selectedOutputDevice: null,
@@ -36,12 +26,12 @@ export default Component.extend(/* LoggerMixin, */{
   videoCallCapable: computed.reads('webrtc.videoCallCapable'),
 
   // TODO: remove this when we can get an event from intl about translations being loaded
-  init () {
-    this._super(...arguments);
-
-    this.get('webrtc').enumerateDevices();
-    this.get('webrtc').enumerateResolutions();
-  },
+  // init () {
+  //   this._super(...arguments);
+  //
+  //   this.get('webrtc').enumerateDevices();
+  //   this.get('webrtc').enumerateResolutions();
+  // },
 
   willDestroyElement () {
     this._super(...arguments);

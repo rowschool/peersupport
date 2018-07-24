@@ -13,18 +13,18 @@ export default Ember.Service.extend(DeviceEnumerationMixin, {
   resolutionList: Ember.A(),
 
   lookup (key, hash) {
-    var translations = Translations;
-    var splitKey = key.split(".");
-    
-    while (splitKey.length) {
-        if (typeof translations !== "object") {
-            return undefined;
-        }
+      var translations = Translations;
+      var splitKey = key.split(".");
 
-        translations = translations[splitKey.shift()];
-    }
+      while (splitKey.length) {
+          if (typeof translations !== "object") {
+              return undefined;
+          }
 
-    return translations;
+          translations = translations[splitKey.shift()];
+      }
+
+      return translations;
   },
 
   init () {
