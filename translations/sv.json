@@ -1,0 +1,29 @@
+{
+    "webrtcDevices": {
+        "videoSource": "Videokällor",
+        "cameraSelect": "Välj kamera",
+        "audioSource": "Ljudkälla",
+        "microphoneSelect": "Välj mikrofon",
+        "audioDestination": "Ljuddestination (högtalare)",
+        "audioDestinationTooltip": "Testa högtalare",
+        "playAudio": "Spela upp ljud",
+        "outputSelect": "Välj högtalare",
+        "resolution": "Upplösning",
+        "resolutionSelect": "Välj upplösning",
+        "resolutions": {
+            "low": "Låg",
+            "medium": "Medium",
+            "high": "HD"
+        },
+        "troubleshoot": "Kör diagnostik",
+        "browserMediaSettings": "Om du vill konfigurera valda medieenheter klickar du på medieikonen i webbläsarens adressfält.",
+        "noCameraDetected": "Videofunktionen kan tyvärr inte aktiveras eftersom det inte gick att detektera någon kamera.",
+        "noMicrophoneDetected": "Ingen mikrofon hittades, så du kan tyvärr endast lyssna.",
+        "cameraLabel": "Kamera {number}",
+        "microphoneLabel": "Mikrofon {number}",
+        "outputDeviceLabel": "Högtalare {number}",
+        "outputDeviceSystemDefault": "Systemstandard",
+        "default": "Standard",
+        "windowsCommunication": "Kommunikationsenhet för Windows"
+    }
+}

@@ -1,5 +1,3 @@
-/* global cheet */
-
 // import LoggerMixin from 'web-directory/mixins/logger'
 import Ember from 'ember';
 import layout from './template';
@@ -10,7 +8,17 @@ export default Component.extend(/* LoggerMixin, */{
   layout: layout,
   classNameBindings: [':device-selection'],
 
-  selectedCamera: null,
+  selectedCamera: Ember.computed("webrtc.cameraList.firstObject", {
+      get: function() {
+          // console.log("selectedCamera", this.get("webrtc.cameraList.firstObject"));
+          return this.get("webrtc.cameraList.firstObject");
+      },
+      set: function(key, value) {
+          // console.trace("value", value);
+          return value;
+          // debugger;
+      }
+  }),
   selectedMicrophone: null,
   selectedResolution: null,
   selectedOutputDevice: null,
@@ -35,32 +43,10 @@ export default Component.extend(/* LoggerMixin, */{
     this.get('webrtc').enumerateResolutions();
   },
 
-  didInsertElement () {
-    this._super(...arguments);
-
-    run.scheduleOnce('afterRender', () => {
-      if (this.get('video')) {
-        cheet('i n s t a', () => {
-          this.set('advancedOptions', ['willow', 'sutro', 'lofi', 'kelvin', 'inkwell', 'sepia', 'tint', 'none']);
-        });
-      }
-    });
-  },
-
-  didReceiveAttrs () {
-    this._super(...arguments);
-
-    this.send('changeCamera', this.get('selectedCamera.deviceId'));
-    this.send('changeMicrophone', this.get('selectedMicrophone.deviceId'));
-    this.send('changeResolution', this.get('selectedResolution.presetId'));
-    this.send('changeOutputDevice', this.get('selectedOutputDevice.deviceId'));
-  },
-
   willDestroyElement () {
     this._super(...arguments);
 
     if (this.get('video')) {
-      cheet.disable('i n s t a');
       this.set('advancedOptions', null);
     }
   },
@@ -92,7 +78,7 @@ export default Component.extend(/* LoggerMixin, */{
 
     changeCamera (id) {
       if (this.get('selectedCamera.deviceId') !== id) {
-        this.set('selectedCamera', this.get('webrtc.cameraList').findBy('deviceId', id));
+          this.set('selectedCamera', this.get('webrtc.cameraList').findBy('deviceId', id));
       }
     },
 

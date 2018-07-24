@@ -1,6 +1,7 @@
 /* global _, $ */
 
 import Ember from 'ember';
+// import _ from "underscore";
 
 const { Mixin, RSVP, computed, run } = Ember;
 
@@ -23,21 +24,18 @@ export default Mixin.create(Ember.Evented, {
   // camera and video stuff
   hasCameraPermission: false,
   cameraList: Ember.A(),
-  hasCamera: true,
-  // hasCamera: computed('cameraList.[]', function () {
-  //   var cameraList = this.get("cameraList");
-  //
-  //   return cameraList.filter((camera) => {
-  //       return camera.deviceId !== 'default';
-  //   });
-  //   // return !!_.find(this.get('cameraList'), (camera) => camera.deviceId !== 'default');
-  // }),
+  hasCamera: computed("cameraList.length", "cameraList.[]", function () {
+    var cameraList = this.get("cameraList");
+
+    return cameraList.filter(camera => camera.deviceId !== 'default').length > 0;
+    // return !!_.find(this.get('cameraList'), (camera) => camera.deviceId !== 'default');
+  }),
 
   // mic and audio stuff
   hasMicPermission: false,
   microphoneList: Ember.A(),
-  hasMicrophone: true,
-  // hasMicrophone: computed.notEmpty('microphoneList'),
+  // hasMicrophone: true,
+  hasMicrophone: computed.notEmpty('microphoneList'),
 
   callCapable: computed.and('audioCallCapable', 'videoCallCapable'),
 
@@ -163,7 +161,7 @@ export default Mixin.create(Ember.Evented, {
         }
       }));
     }
-
+    console.log("resolutions", resolutions);
     this.set('resolutionList', resolutions);
     return resolutions;
   },
@@ -255,8 +253,8 @@ export default Mixin.create(Ember.Evented, {
             label: device.label,
             groupId: (device.deviceId && device.deviceId.toLowerCase() === 'default') ? null : device.groupId
           };
-          // const hasLabel = !_.isEmpty(device.label);
-          const hasLabel = true;
+          const hasLabel = !_.isEmpty(device.label);
+          // const hasLabel = true;
 
           if (device.kind === 'audioinput') {
             addMicrophone(deviceInfo, hasLabel);
@@ -268,6 +266,7 @@ export default Mixin.create(Ember.Evented, {
         });
       }
 
+      // console.log("cameras", cameras);
       this.setProperties({
         cameraList: Ember.A(cameras),
         microphoneList: Ember.A(microphones),

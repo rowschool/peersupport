@@ -1,11 +1,9 @@
 import Ember from "ember";
-
-const tHelper = Ember.Helper.extend({
-  compute: (params) => params[0]
-});
+import Translations from "peersupport/models/translations/en-us";
 
 export function t(params) {
-    return params[0];
+    var translations = Translations;
+    return translations[Object.keys(translations)[0]][params[0].split(".")[1]];
 }
 
 export default Ember.Helper.helper(t);

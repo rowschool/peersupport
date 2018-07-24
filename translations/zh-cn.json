@@ -1,0 +1,29 @@
+{
+    "webrtcDevices": {
+        "videoSource": "视频源",
+        "cameraSelect": "选择摄像头",
+        "audioSource": "音频源",
+        "microphoneSelect": "选择麦克风",
+        "audioDestination": "音频目标（扬声器）",
+        "audioDestinationTooltip": "测试扬声器",
+        "playAudio": "播放声音",
+        "outputSelect": "选择扬声器",
+        "resolution": "分辨率",
+        "resolutionSelect": "选择分辨率",
+        "resolutions": {
+            "low": "低",
+            "medium": "中",
+            "high": "HD"
+        },
+        "troubleshoot": "运行诊断",
+        "browserMediaSettings": "要配置选定媒体设备，请使用浏览器地址栏上的媒体图标。",
+        "noCameraDetected": "对不起，无法启动视频，因为未检测到摄像头。",
+        "noMicrophoneDetected": "对不起，由于未检测到麦克风，因此您只可以听，不可以说。",
+        "cameraLabel": "摄像头 {number}",
+        "microphoneLabel": "麦克风 {number}",
+        "outputDeviceLabel": "扬声器 {number}",
+        "outputDeviceSystemDefault": "系统默认值",
+        "default": "默认",
+        "windowsCommunication": "Windows 通信设备"
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "webrtcDevices": {
+        "videoSource": "Video kaynakları",
+        "cameraSelect": "Kamera seç",
+        "audioSource": "Ses kaynağı",
+        "microphoneSelect": "Mikrofon seç",
+        "audioDestination": "Ses hedefi (hoparlörler)",
+        "audioDestinationTooltip": "Hoparlörleri test et",
+        "playAudio": "Ses Çal",
+        "outputSelect": "Hoparlörleri seç",
+        "resolution": "Çözünürlük",
+        "resolutionSelect": "Çözünürlük seç",
+        "resolutions": {
+            "low": "Düşük",
+            "medium": "Orta",
+            "high": "HD"
+        },
+        "troubleshoot": "Tanılamayı Çalıştır",
+        "browserMediaSettings": "Seçili medya cihazlarını yapılandırmak için lütfen tarayıcınızın adres çubuğundaki medya simgesini kullanın.",
+        "noCameraDetected": "Kamera algılanmadığından video başlatılamıyor.",
+        "noMicrophoneDetected": "Mikrofon algılanamadığı için sadece dinleyebilirsiniz.",
+        "cameraLabel": "Kamera {number}",
+        "microphoneLabel": "Mikrofon {number}",
+        "outputDeviceLabel": "Hoparlör {number}",
+        "outputDeviceSystemDefault": "Sistem varsayılanı",
+        "default": "Varsayılan",
+        "windowsCommunication": "Windows İletişim Aygıtı"
+    }
+}

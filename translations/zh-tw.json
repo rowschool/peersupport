@@ -1,0 +1,29 @@
+{
+    "webrtcDevices": {
+        "videoSource": "視訊來源",
+        "cameraSelect": "選擇攝影機",
+        "audioSource": "音訊來源",
+        "microphoneSelect": "選擇麥克風",
+        "audioDestination": "音訊目標（揚聲器）",
+        "audioDestinationTooltip": "測試揚聲器",
+        "playAudio": "播放聲音",
+        "outputSelect": "選擇揚聲器",
+        "resolution": "解析度",
+        "resolutionSelect": "選擇解析度",
+        "resolutions": {
+            "low": "低",
+            "medium": "中",
+            "high": "HD"
+        },
+        "troubleshoot": "執行診斷",
+        "browserMediaSettings": "要設定選定媒體裝置，請使用瀏覽器位址欄上的媒體圖示。",
+        "noCameraDetected": "抱歉，無法啟動視訊，因為未偵測到攝影機。",
+        "noMicrophoneDetected": "抱歉，由於未偵測到麥克風，因此您只能聽，無法說。",
+        "cameraLabel": "攝影機 {number}",
+        "microphoneLabel": "麥克風 {number}",
+        "outputDeviceLabel": "揚聲器 {number}",
+        "outputDeviceSystemDefault": "系統預設值",
+        "default": "預設",
+        "windowsCommunication": "Windows 通訊裝置"
+    }
+}

@@ -5,6 +5,7 @@ export default Ember.Component.extend({
 
     options: null,
     selectedValue: null,
+    valueField: "value",
 
     menuOpen: false,
     titleCase: false,
@@ -17,8 +18,9 @@ export default Ember.Component.extend({
     //     ["sample1","sample2","sample3"]
     // Array of objects (when the value and display string need to be different):
     //     [{title: "sample1", value:"val1"},{title: "sample2", value:"val2"}]
-    innerOptions: Ember.computed("options", "options.[]", function () {
-        var options = (this.get("options") || []);
+    innerOptions: Ember.computed("options", "options.[]", "valueField", function () {
+        var options = (this.get("options") || []),
+            valueField = this.get("valueField");
         if (typeof(options) === "string") {
             options = options.split(",");
         }
@@ -30,7 +32,8 @@ export default Ember.Component.extend({
             } else if (typeof(option) === "object") {
                 var optTitle = Ember.get(option, "title"),
                     optLabel = Ember.get(option, "label"),
-                    optValue = Ember.get(option, "value");
+                    optValue = Ember.get(option, valueField);
+
                 return {
                     title: optTitle || optLabel || optValue,
                     value: Ember.isEmpty(optValue) ? optTitle : optValue,
@@ -40,10 +43,10 @@ export default Ember.Component.extend({
         }).filter(function(option) { return option && !Ember.isEmpty(option.value); });
     }),
 
-    selectedOption: Ember.computed("innerOptions", "innerOptions.[]", "selectedValue", function () {
+    selectedOption: Ember.computed("innerOptions", "innerOptions.[]", "selectedValue", "valueField", function () {
         var selectedValue = this.get("selectedValue"),
             options = this.get("innerOptions") || [],
-            selectedOption = this.get("innerOptions").findBy("value", selectedValue);
+            selectedOption = this.get("innerOptions").findBy(this.get("valueField"), selectedValue);
         if (Ember.isEmpty(selectedOption) && options && options.length) {
             selectedOption = options[0];
             if (selectedOption) {

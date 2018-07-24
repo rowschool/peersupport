@@ -1,0 +1,29 @@
+{
+    "webrtcDevices": {
+        "videoSource": "Źródła wideo",
+        "cameraSelect": "Wybierz kamerę",
+        "audioSource": "Źródło dźwięku",
+        "microphoneSelect": "Wybierz mikrofon",
+        "audioDestination": "Docelowe urządzenie audio (głośniki)",
+        "audioDestinationTooltip": "Testuj głośniki",
+        "playAudio": "Odtwórz dźwięk",
+        "outputSelect": "Wybierz głośniki",
+        "resolution": "Rozdzielczość",
+        "resolutionSelect": "Wybierz rozdzielczość",
+        "resolutions": {
+            "low": "Niska",
+            "medium": "Średnia",
+            "high": "HD"
+        },
+        "troubleshoot": "Uruchom diagnostykę",
+        "browserMediaSettings": "Aby skonfigurować wybrane urządzenia multimedialne, należy użyć ikony mediów w pasku adresu przeglądarki.",
+        "noCameraDetected": "Niestety, nie można zacząć sesji wideo, ponieważ nie wykryto kamery.",
+        "noMicrophoneDetected": "Nie wykryto mikrofonu, możesz tylko słuchać.",
+        "cameraLabel": "Kamera {number}",
+        "microphoneLabel": "Mikrofon {number}",
+        "outputDeviceLabel": "Głośnik {number}",
+        "outputDeviceSystemDefault": "Domyślne ustawienie systemowe",
+        "default": "Domyślne",
+        "windowsCommunication": "Urządzenie komunikacyjne z systemem Windows"
+    }
+}

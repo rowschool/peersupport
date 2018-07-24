@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import DeviceEnumerationMixin from 'peersupport/mixins/device-enumeration';
+import Translations from "peersupport/models/translations/en-us";
 
 export default Ember.Service.extend(DeviceEnumerationMixin, {
-  // intl: Ember.inject.service(),
+  intl: Ember.inject.service(),
 
   canListDevices: true,
 
@@ -11,16 +12,23 @@ export default Ember.Service.extend(DeviceEnumerationMixin, {
   outputDeviceList: Ember.A(),
   resolutionList: Ember.A(),
 
-  // lookup (key, hash) {
-  //   const intl = this.get('intl');
-  //   return intl.formatHtmlMessage(intl.findTranslationByKey(key), hash);
-  // },
+  lookup (key, hash) {
+    var translations = Translations;
+    var splitKey = key.split(".");
+    
+    while (splitKey.length) {
+        if (typeof translations !== "object") {
+            return undefined;
+        }
+
+        translations = translations[splitKey.shift()];
+    }
+
+    return translations;
+  },
 
   init () {
     this._super(...arguments);
     window.webrtcService = this;
   }
 });
-
-// TODO:
-// https://github.com/ember-intl/ember-intl/blob/master/docs/asynchronously-loading-translations.md#asynchronous-loading-of-translations

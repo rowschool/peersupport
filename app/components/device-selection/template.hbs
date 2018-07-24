@@ -12,14 +12,11 @@
                 </div>
                 <div class="entry-values">
                     {{#if webrtc.hasCamera}}
-                        {{#x-select id=(concat elementId '-camera-select')
-                           value=selectedCameraId
-                           action="changeCamera"
-                           class="form-control camera-select"}}
-                            {{#each webrtc.cameraList as |camera|}}
-                                {{#x-option value=camera.deviceId}}{{camera.label}}{{/x-option}}
-                            {{/each}}
-                        {{/x-select}}
+                      {{forms/menu-selector
+                        selectedValue = selectedCamera
+                        valueField = "deviceId"
+                        options = webrtc.cameraList
+                        changed = "changeCamera"}}
                     {{else}}
                         <span>{{t "webrtcDevices.noCameraDetected"}}</span>
                     {{/if}}
@@ -33,15 +30,10 @@
                         </label>
                     </div>
                     <div class="entry-values">
-                        {{#x-select
-                           id=(concat elementId '-filter-select')
-                           value=selectedFilter
-                           action="changeFilter"
-                           class="form-control filter-select"}}
-                            {{#each advancedOptions as |filter|}}
-                                {{#x-option value=filter}}{{filter}}{{/x-option}}
-                            {{/each}}
-                        {{/x-select}}
+                        {{forms/menu-selector
+                            selectedValue = selectedFilter
+                            options = advancedOptions
+                            changed = "changeFilter"}}
                     </div>
                 </div>
             {{/if}}
@@ -58,15 +50,11 @@
                 </div>
                 <div class="entry-values">
                     {{#if webrtc.hasMicrophone}}
-                        {{#x-select
-                           id=(concat elementId '-microphone-select')
-                           value=selectedMicrophoneId
-                           action="changeMicrophone"
-                           class="form-control microphone-select"}}
-                            {{#each webrtc.microphoneList as |microphone|}}
-                                {{#x-option value=microphone.deviceId}}{{microphone.label}}{{/x-option}}
-                            {{/each}}
-                        {{/x-select}}
+                        {{forms/menu-selector
+                            selectedValue = selectedMicrophone
+                            valueField = "deviceId"
+                            options = webrtc.microphoneList
+                            changed = "changeMicrophone"}}
                     {{else}}
                         <span>{{t "webrtcDevices.noMicrophoneDetected"}}</span>
                     {{/if}}
@@ -84,15 +72,12 @@
                     </label>
                 </div>
                 <div class="entry-values">
-                    {{#x-select
-                       id=(concat elementId '-resolution-select')
-                       value=selectedResolutionId
-                       action="changeResolution"
-                       class="form-control resolution-select"}}
-                        {{#each webrtc.resolutionList as |resolution|}}
-                            {{#x-option value=resolution.presetId}}{{resolution.label}}{{/x-option}}
-                        {{/each}}
-                    {{/x-select}}
+                    {{log "resolutionList" webrtc.resolutionList}}
+                    {{forms/menu-selector
+                        selectedValue = selectedResolution
+                        valueField = "presetId"
+                        options = webrtc.resolutionList
+                        changed = "changeResolution"}}
                 </div>
             </div>
         {{/if}}
@@ -113,15 +98,11 @@
             </div>
             <div class="entry-values">
                 {{#if webrtc.outputDeviceList.length}}
-                    {{#x-select
-                       id=(concat elementId '-speakers-select')
-                       value=selectedOutputDeviceId
-                       action="changeOutputDevice"
-                       class="form-control speakers-select"}}
-                        {{#each webrtc.outputDeviceList as |outputDevice|}}
-                            {{#x-option value=outputDevice.deviceId}}{{outputDevice.label}}{{/x-option}}
-                        {{/each}}
-                    {{/x-select}}
+                    {{forms/menu-selector
+                        selectedValue = selectedOutputDevice
+                        valueField = "deviceId"
+                        options = webrtc.outputDeviceList
+                        changed = "changeOutputDevice"}}
                 {{else}}
                   <span class="system-default-message">{{t "webrtcDevices.outputDeviceSystemDefault"}}</span>
                 {{/if}}

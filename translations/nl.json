@@ -1,0 +1,29 @@
+{
+    "webrtcDevices": {
+        "videoSource": "Videobronnen",
+        "cameraSelect": "Selecteer camera",
+        "audioSource": "Audiobron",
+        "microphoneSelect": "Selecteer microfoon",
+        "audioDestination": "Audioapparaat (speakers)",
+        "audioDestinationTooltip": "Speakers testen",
+        "playAudio": "Geluid afspelen",
+        "outputSelect": "Selecteer speakers",
+        "resolution": "Resolutie",
+        "resolutionSelect": "Resolutie selecteren",
+        "resolutions": {
+            "low": "Laag",
+            "medium": "Gemiddeld",
+            "high": "HD"
+        },
+        "troubleshoot": "Diagnose uitvoeren",
+        "browserMediaSettings": "Gebruik het mediumpictogram in de adresbalk van uw browser om de geselecteerde mediumapparaten te configureren.",
+        "noCameraDetected": "De video kan niet worden gestart omdat er geen camera is gedetecteerd.",
+        "noMicrophoneDetected": "Er is geen microfoon gevonden. U kunt daarom alleen luisteren.",
+        "cameraLabel": "Camera {number}",
+        "microphoneLabel": "Microfoon {number}",
+        "outputDeviceLabel": "Speaker {number}",
+        "outputDeviceSystemDefault": "Systeemstandaard",
+        "default": "Standaard",
+        "windowsCommunication": "Windows-communicatieapparaat"
+    }
+}

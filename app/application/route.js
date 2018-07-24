@@ -1,8 +1,6 @@
 import Ember from 'ember';
 
-// app/routes/application.js
 export default Ember.Route.extend({
-  // NOTE: intl is an npm package
   intl: Ember.inject.service(),
 
   webrtc: Ember.inject.service(),

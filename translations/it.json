@@ -1,0 +1,29 @@
+{
+    "webrtcDevices": {
+        "videoSource": "Sorgenti video",
+        "cameraSelect": "Seleziona videocamera",
+        "audioSource": "Sorgente audio",
+        "microphoneSelect": "Seleziona microfono",
+        "audioDestination": "Destinazione audio (altoparlanti)",
+        "audioDestinationTooltip": "Verifica altoparlanti",
+        "playAudio": "Riproduci suono",
+        "outputSelect": "Seleziona altoparlanti",
+        "resolution": "Risoluzione",
+        "resolutionSelect": "Seleziona risoluzione",
+        "resolutions": {
+            "low": "Bassa",
+            "medium": "Media",
+            "high": "Alta"
+        },
+        "troubleshoot": "Esegui diagnostiche",
+        "browserMediaSettings": "Per configurare i dispositivi multimediali selezionati, usare la relativa icona nella barra dell'indirizzo del browser.",
+        "noCameraDetected": "Impossibile avviare il video. Non è stata rilevata una videocamera.",
+        "noMicrophoneDetected": "Impossibile avviare l'audio. Non è stato rilevato un microfono",
+        "cameraLabel": "Videocamera {number}",
+        "microphoneLabel": "Microfono {number}",
+        "outputDeviceLabel": "Altoparlante {number}",
+        "outputDeviceSystemDefault": "Valori predefiniti del sistema",
+        "default": "Predefinito",
+        "windowsCommunication": "Dispositivo di comunicazione Windows"
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "webrtcDevices": {
+        "videoSource": "Videoquellen",
+        "cameraSelect": "Kamera auswählen",
+        "audioSource": "Audioquelle",
+        "microphoneSelect": "Mikrofon auswählen",
+        "audioDestination": "Audioziel (Lautsprecher)",
+        "audioDestinationTooltip": "Lautsprecher testen",
+        "playAudio": "Sound wiedergeben",
+        "outputSelect": "Lautsprecher auswählen",
+        "resolution": "Auflösung",
+        "resolutionSelect": "Auflösung auswählen",
+        "resolutions": {
+            "low": "Niedrig",
+            "medium": "Mittel",
+            "high": "HD"
+        },
+        "troubleshoot": "Diagnose ausführen",
+        "browserMediaSettings": "Um die ausgewählten Mediengeräte zu konfigurieren, verwenden Sie das Mediensymbol in der Adressleiste Ihres Browsers.",
+        "noCameraDetected": "Video kann leider nicht gestartet werden, da keine Kamera erkannt wurde.",
+        "noMicrophoneDetected": "Leider wurde kein Mikrofon erkannt, daher können Sie nur zuhören.",
+        "cameraLabel": "Kamera {number}",
+        "microphoneLabel": "Mikrofon {number}",
+        "outputDeviceLabel": "Lautsprecher {number}",
+        "outputDeviceSystemDefault": "Systemstandard",
+        "default": "Standard",
+        "windowsCommunication": "Windows-Kommunikationsgerät"
+    }
+}
