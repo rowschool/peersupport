@@ -41,10 +41,10 @@ export default Component.extend(/* LoggerMixin, */{
     }
   },
 
-  selectedCameraId: computed.reads('selectedCamera.deviceId'),
-  selectedResolutionId: computed.reads('selectedResolution.presetId'),
-  selectedMicrophoneId: computed.reads('selectedMicrophone.deviceId'),
-  selectedOutputDeviceId: computed.reads('selectedOutputDevice.deviceId'),
+  selectedCameraId: computed.alias('selectedCamera.deviceId'),
+  selectedResolutionId: computed.alias('selectedResolution.presetId'),
+  selectedMicrophoneId: computed.alias('selectedMicrophone.deviceId'),
+  selectedOutputDeviceId: computed.alias('selectedOutputDevice.deviceId'),
 
   showTroubleshoot: computed('troubleshoot', function () {
     return this.get('troubleshoot') && typeof this.attrs.openTroubleshoot === 'function';
@@ -67,6 +67,7 @@ export default Component.extend(/* LoggerMixin, */{
     },
 
     changeCamera (id) {
+      // console.trace("changeCamera", id);
       if (this.get('selectedCamera.deviceId') !== id) {
           this.set('selectedCamera', this.get('webrtc.cameraList').findBy('deviceId', id));
       }

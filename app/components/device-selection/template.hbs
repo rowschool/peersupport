@@ -6,6 +6,7 @@
       <span class="ps-device-selection-label">{{t "webrtcDevices.videoSource"}}</span>
 
       {{#if webrtc.hasCamera}}
+      {{log "selectedCamera" selectedCamera "selectedCamera.deviceId" selectedCamera.deviceId}}
         {{forms/menu-selector
           selectedValue = selectedCamera
           valueField = "deviceId"
@@ -15,16 +16,16 @@
         <span class="ps-device-selection-label">{{t "webrtcDevices.noCameraDetected"}}</span>
       {{/if}}
 
-      {{#if advancedOptions}}
+      {{!-- {{#if advancedOptions}}
         {{forms/menu-selector
             selectedValue = selectedFilter
             options = advancedOptions
             changed = "changeFilter"}}
-      {{/if}}
+      {{/if}} --}}
     </div>
   {{/if}}
 
-  {{#if (and webrtc.microphoneList.length audio)}}
+  {{!-- {{#if (and webrtc.microphoneList.length audio)}}
     <div class="ps-device-selection-item">
       <span class="ps-device-selection-label">{{t "webrtcDevices.audioSource"}}</span>
 
@@ -70,7 +71,7 @@
     {{else}}
       <span class="ps-device-selection-label">{{t "webrtcDevices.outputDeviceSystemDefault"}}</span>
     {{/if}}
-  </div>
+  </div> --}}
 {{/if}}
 
 {{#if showTroubleshoot}}

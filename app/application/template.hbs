@@ -1,43 +1,43 @@
 <div class="ps-device-list">
-  <p class="ps-device-list-header-text">
+  <p class="ps-device-list-header-text text-center">
     This dummy page will request user media, in order to access names of devices, <br />
     then will re-enumerate devices and populate the select boxes.
   </p>
 
-  <ul class="ps-device-list-capabilities">
-    <li>
-      <span class="ps-device-list-capabilities-item-label">{{title-case "audioCallCapable"}}:</span>
-      <span class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.audioCallCapable}}</span>
-    </li>
-    <li>
-      <span class="ps-device-list-capabilities-item-label">{{title-case "videoCallCapable"}}:</span>
-      <span class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.videoCallCapable}}</span>
-    </li>
-    <li>
-      <span class="ps-device-list-capabilities-item-label">{{title-case "callCapable"}}:</span>
-      <span class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.callCapable}}</span>
-    </li>
-    <li>
-      <span class="ps-device-list-capabilities-item-label">{{title-case "hasMicPermission"}}:</span>
-      <span class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.hasMicPermission}}</span>
-    </li>
-    <li>
-      <span class="ps-device-list-capabilities-item-label">{{title-case "hasMicrophone"}}:</span>
-      <span class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.hasMicrophone}}</span>
-    </li>
-    <li>
-      <span class="ps-device-list-capabilities-item-label">{{title-case "hasCameraPermission"}}:</span>
-      <span class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.hasCameraPermission}}</span>
-    </li>
-    <li>
-      <span class="ps-device-list-capabilities-item-label">{{title-case "hasCamera"}}:</span>
-      <span class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.hasCamera}}</span>
-    </li>
-    <li>
-      <span class="ps-device-list-capabilities-item-label">{{title-case "canListDevices"}}:</span>
-      <span class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.canListDevices}}</span>
-    </li>
-  </ul>
+  <table class="ps-device-list-capabilities">
+    <tr class="ps-device-list-capabilities-item">
+      <td class="ps-device-list-capabilities-item-label">{{title-case "audioCallCapable"}}:</td>
+      <td class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.audioCallCapable}}</td>
+    </tr>
+    <tr class="ps-device-list-capabilities-item">
+      <td class="ps-device-list-capabilities-item-label">{{title-case "videoCallCapable"}}:</td>
+      <td class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.videoCallCapable}}</td>
+    </tr>
+    <tr class="ps-device-list-capabilities-item">
+      <td class="ps-device-list-capabilities-item-label">{{title-case "callCapable"}}:</td>
+      <td class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.callCapable}}</td>
+    </tr>
+    <tr class="ps-device-list-capabilities-item">
+      <td class="ps-device-list-capabilities-item-label">{{title-case "hasMicPermission"}}:</td>
+      <td class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.hasMicPermission}}</td>
+    </tr>
+    <tr class="ps-device-list-capabilities-item">
+      <td class="ps-device-list-capabilities-item-label">{{title-case "hasMicrophone"}}:</td>
+      <td class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.hasMicrophone}}</td>
+    </tr>
+    <tr class="ps-device-list-capabilities-item">
+      <td class="ps-device-list-capabilities-item-label">{{title-case "hasCameraPermission"}}:</td>
+      <td class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.hasCameraPermission}}</td>
+    </tr>
+    <tr class="ps-device-list-capabilities-item">
+      <td class="ps-device-list-capabilities-item-label">{{title-case "hasCamera"}}:</td>
+      <td class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.hasCamera}}</td>
+    </tr>
+    <tr class="ps-device-list-capabilities-item">
+      <td class="ps-device-list-capabilities-item-label">{{title-case "canListDevices"}}:</td>
+      <td class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.canListDevices}}</td>
+    </tr>
+  </table>
 
   {{device-selection}}
 

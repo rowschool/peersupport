@@ -1,7 +1,6 @@
 /* global _, $ */
 
 import Ember from 'ember';
-// import _ from "underscore";
 
 const { Mixin, RSVP, computed, run } = Ember;
 
@@ -28,7 +27,6 @@ export default Mixin.create(Ember.Evented, {
     var cameraList = this.get("cameraList");
 
     return cameraList.filter(camera => camera.deviceId !== 'default').length > 0;
-    // return !!_.find(this.get('cameraList'), (camera) => camera.deviceId !== 'default');
   }),
 
   // mic and audio stuff
@@ -193,8 +191,7 @@ export default Mixin.create(Ember.Evented, {
         device.label = device.label || this.lookup('webrtcDevices.cameraLabel', {number: ++cameraCount}).toString();
       }
 
-      this.set('hasCameraPermission', false);
-      // this.set('hasCameraPermission', this.get('hasCameraPermission') || hasBrowserLabel);
+      this.set('hasCameraPermission', this.get('hasCameraPermission') || hasBrowserLabel);
 
       cameras.push(Ember.Object.create(device));
     };
@@ -209,8 +206,7 @@ export default Mixin.create(Ember.Evented, {
         device.label = device.label || this.lookup('webrtcDevices.microphoneLabel', {number: ++microphoneCount}).toString();
       }
 
-      this.set('hasMicPermission', false);
-      // this.set('hasMicPermission', this.get('hasMicPermission') || hasBrowserLabel);
+      this.set('hasMicPermission', this.get('hasMicPermission') || hasBrowserLabel);
 
       microphones.push(Ember.Object.create(device));
     };
@@ -253,7 +249,7 @@ export default Mixin.create(Ember.Evented, {
             label: device.label,
             groupId: (device.deviceId && device.deviceId.toLowerCase() === 'default') ? null : device.groupId
           };
-          const hasLabel = !_.isEmpty(device.label);
+          const hasLabel = !Ember.isEmpty(device.label);
 
           if (device.kind === 'audioinput') {
             addMicrophone(deviceInfo, hasLabel);
