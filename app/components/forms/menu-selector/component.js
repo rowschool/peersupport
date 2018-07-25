@@ -46,13 +46,9 @@ export default Ember.Component.extend({
     selectedOption: Ember.computed("innerOptions", "innerOptions.[]", "selectedValue", "valueField", function () {
         var selectedValue = this.get("selectedValue"),
             options = this.get("innerOptions") || [],
-            selectedOption = this.get("innerOptions").findBy(this.get("valueField"), selectedValue);
-        // debugger;
-        console.log("selectedValue", selectedValue)
-        console.log("options", options);
-        console.log("selectedOption", selectedOption);
+            selectedOption = this.get("innerOptions").findBy("value", selectedValue);
+
         if (Ember.isEmpty(selectedOption) && options && options.length) {
-            console.log("isEmpty", selectedOption);
             selectedOption = options[0];
             if (selectedOption) {
                 Ember.run.scheduleOnce("afterRender", this, () => {
@@ -71,7 +67,6 @@ export default Ember.Component.extend({
             this.set("editorOpen", false);
         },
         selectedValueChanged: function(selection) {
-            // console.trace("selectedValueChanged", selection);
             this.sendAction("changed", selection);
             this.set("editorOpen", false);
         }

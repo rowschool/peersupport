@@ -3,7 +3,7 @@ import DeviceEnumerationMixin from 'peersupport/mixins/device-enumeration';
 import Translations from "peersupport/models/translations/en-us";
 
 export default Ember.Service.extend(DeviceEnumerationMixin, {
-  intl: Ember.inject.service(),
+  // intl: Ember.inject.service(),
 
   canListDevices: true,
 

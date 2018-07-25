@@ -6,32 +6,31 @@
       <span class="ps-device-selection-label">{{t "webrtcDevices.videoSource"}}</span>
 
       {{#if webrtc.hasCamera}}
-      {{log "selectedCamera" selectedCamera "selectedCamera.deviceId" selectedCamera.deviceId}}
-        {{forms/menu-selector
-          selectedValue = selectedCamera
-          valueField = "deviceId"
-          options = webrtc.cameraList
-          changed = "changeCamera"}}
+          {{forms/menu-selector
+            selectedValue = selectedCameraId
+            valueField = "deviceId"
+            options = webrtc.cameraList
+            changed = "changeCamera"}}
       {{else}}
         <span class="ps-device-selection-label">{{t "webrtcDevices.noCameraDetected"}}</span>
       {{/if}}
 
-      {{!-- {{#if advancedOptions}}
+      {{#if advancedOptions}}
         {{forms/menu-selector
             selectedValue = selectedFilter
             options = advancedOptions
             changed = "changeFilter"}}
-      {{/if}} --}}
+      {{/if}}
     </div>
   {{/if}}
 
-  {{!-- {{#if (and webrtc.microphoneList.length audio)}}
+  {{#if (and webrtc.microphoneList.length audio)}}
     <div class="ps-device-selection-item">
       <span class="ps-device-selection-label">{{t "webrtcDevices.audioSource"}}</span>
 
       {{#if webrtc.hasMicrophone}}
         {{forms/menu-selector
-            selectedValue = selectedMicrophone
+            selectedValue = selectedMicrophoneId
             valueField = "deviceId"
             options = webrtc.microphoneList
             changed = "changeMicrophone"}}
@@ -46,7 +45,7 @@
       <span class="ps-device-selection-label">{{t "webrtcDevices.resolution"}}</span>
 
       {{forms/menu-selector
-          selectedValue = selectedResolution
+          selectedValue = selectedResolutionId
           valueField = "presetId"
           options = webrtc.resolutionList
           changed = "changeResolution"}}
@@ -64,14 +63,14 @@
 
     {{#if webrtc.outputDeviceList.length}}
       {{forms/menu-selector
-          selectedValue = selectedOutputDevice
+          selectedValue = selectedOutputDeviceId
           valueField = "deviceId"
           options = webrtc.outputDeviceList
           changed = "changeOutputDevice"}}
     {{else}}
       <span class="ps-device-selection-label">{{t "webrtcDevices.outputDeviceSystemDefault"}}</span>
     {{/if}}
-  </div> --}}
+  </div>
 {{/if}}
 
 {{#if showTroubleshoot}}

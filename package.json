@@ -43,7 +43,6 @@
   },
   "dependencies": {
     "ember-cli-less": "^1.5.5",
-    "ember-intl": "^3.1.1",
     "getstats": "^1.0.6",
     "multirtc": "^7.0.2",
     "underscore": "^1.9.1",
