@@ -25,14 +25,6 @@ export default Component.extend(/* LoggerMixin, */{
   audioCallCapable: computed.reads('webrtc.audioCallCapable'),
   videoCallCapable: computed.reads('webrtc.videoCallCapable'),
 
-  // TODO: remove this when we can get an event from intl about translations being loaded
-  // init () {
-  //   this._super(...arguments);
-  //
-  //   this.get('webrtc').enumerateDevices();
-  //   this.get('webrtc').enumerateResolutions();
-  // },
-
   willDestroyElement () {
     this._super(...arguments);
 
@@ -67,7 +59,6 @@ export default Component.extend(/* LoggerMixin, */{
     },
 
     changeCamera (id) {
-      // console.trace("changeCamera", id);
       if (this.get('selectedCamera.deviceId') !== id) {
           this.set('selectedCamera', this.get('webrtc.cameraList').findBy('deviceId', id));
       }
