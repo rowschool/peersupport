@@ -1,8 +1,8 @@
 // source: https://github.com/muaz-khan/getStats
 
 import Ember from "ember";
-import IceServersHandler from "peersupport/models/ice-servers-handler";
-import preferSelectedCodec from "peersupport/models/prefer-selected-codec";
+import IceServersHandler from "peersupport/models/ice-servers-handler"; // config
+import preferSelectedCodec from "peersupport/models/prefer-selected-codec"; // method
 
 export default Ember.Component.extend({
     classNames: ["text-center"],
