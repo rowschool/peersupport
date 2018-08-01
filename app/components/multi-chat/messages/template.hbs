@@ -1,0 +1,12 @@
+{{!-- // userinfoDIV.style.height = newMessageDIV.clientHeight + 'px'; --}}
+{{#each messages as |args|}}
+  <div class="new-message">
+    <div class="user-info">{{args.userinfo}}</div> || '<img src="images/user.png">'</div>
+    <div class="user-activity">
+      <h2 class="header">{{args.header}}</h2>
+      <p class="message">{{args.message}}</p>
+    </div>
+  </div>
+{{/each}}
+
+{{!-- on init of new message: document.querySelector('#message-sound').play(); --}}

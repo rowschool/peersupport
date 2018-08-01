@@ -1,8 +1,8 @@
 // source: https://github.com/muaz-khan/getStats
 
 import Ember from "ember";
-import IceServersHandler from "peersupport/models/ice-servers-handler"; // config
-import preferSelectedCodec from "peersupport/models/prefer-selected-codec"; // method
+import IceServersHandler from "peersupport/models/verify/ice-servers-handler"; // config
+import preferSelectedCodec from "peersupport/models/verify/prefer-selected-codec"; // method
 
 export default Ember.Component.extend({
     classNames: ["text-center"],
@@ -52,10 +52,11 @@ export default Ember.Component.extend({
             bundlePolicy: 'max-bundle'
         };
     }),
-    mediaConstraints: {
-        OfferToReceiveAudio: true,
-        OfferToReceiveVideo: true
-    },
+    // mediaConstraints: {
+    //     OfferToReceiveAudio: true,
+    //     OfferToReceiveVideo: true
+    // },
+    mediaConstraints: { video: true, audio: true },
 
     STOP_GETSTATS: false,
     CAMERA_STREAM: null,
@@ -73,7 +74,7 @@ export default Ember.Component.extend({
             alert(JSON.stringify(e, null, '\t'));
         }
 
-        var mediaConstraints = { video: true, audio: true };
+        var mediaConstraints = this.get("mediaConstraints");
 
         navigator.mediaDevices.getUserMedia(mediaConstraints).then(successCallback).catch(errorCallback);
     },

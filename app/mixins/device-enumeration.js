@@ -274,7 +274,7 @@ export default Ember.Mixin.create(Ember.Evented, {
         }).catch(err => {
             if (!this.get("isDestroyed") && !this.get("isDestroying")) {
                 Ember.Logger.error(err);
-                // this.set("canListDevices", false);
+                this.set("canListDevices", false);
                 addMicrophone(defaultDevice);
             }
         });

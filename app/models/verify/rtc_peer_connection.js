@@ -1,9 +1,10 @@
 import Ember from "ember";
-import IceServersHandler from "peersupport/models/ice-servers-handler";
-import getStats from "peersupport/models/getStats";
-import RtcPeerConnectionMixin from "peersupport/models/rtc_peer_connection_mixin";
+import IceServersHandler from "peersupport/models/verify/ice-servers-handler";
+import getStats from "peersupport/models/verify/getStats";
 
-export default Ember.Object.extend(RtcPeerConnectionMixin, {
+export default Ember.Object.extend({
+    webrtc: Ember.inject.service(),
+
     id: 1,
     peer: null,
     iceTransportPolicy: "all",
@@ -54,8 +55,22 @@ export default Ember.Object.extend(RtcPeerConnectionMixin, {
     //     }
     // },
 
+    // NOTE: This is from application/route
+    // beforeModel () {
+    //     Ember.run.next(this, function () {
+    //         window.navigator.mediaDevices.getUserMedia({
+    //             audio: true,
+    //             video: true
+    //         }).then((stream) => {
+    //             stream.getTracks().forEach((t) => t.stop());
+    //             this.get('webrtc').enumerateDevices();
+    //         });
+    //     });
+    // }
+
     init: function() {
-        var peer = RtcPeerConnectionMixin;
+        // var peer = this.get("webrtc");
+        var peer = new RTCPeerConnection();
         peer.id = this.get("id");
         peer.iceServers = this.get("iceServers");
         // debugger;
@@ -63,7 +78,7 @@ export default Ember.Object.extend(RtcPeerConnectionMixin, {
         //     id: this.get("id"),
         //     iceServers: this.get("iceServers")
         // });
-        debugger;
+        // debugger;
         var that = this;
         // var video_stream = peer.get("video_stream");
         // var video_stream = peer.video_stream;

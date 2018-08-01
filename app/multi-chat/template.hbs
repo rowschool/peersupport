@@ -1,1 +1,68 @@
-{{multi-chat}}
+{{multi-chat/settings}}
+
+<div class="main">
+  {{multi-chat/messages
+      messages = messages}}
+
+  <div class="users-list {{if isUsersContainerVisible "selected" ""}}" title="Click to view all shared screens and videos!" {{action "selectUsersList"}}>
+    <div class="numbers-of-users">{{numberOfUsers}}</div>
+    <!-- Users -->
+    <img src="images/users.png">
+  </div>
+
+  <div class="main-input-box">
+    <textarea placeholder="Send a message"></textarea>
+
+    <p id="who-is-typing"></p>
+
+    <div class="controls">
+      <i class="ii ii-webcam" {{action "toggleWebcam"}} disabled={{isWebcamDisabled}} title="Enable your webcam"></i>
+      <i class="ii ii-microphone" {{action "toggleMic"}} disabled={{isMicDisabled}} title="Enable your microphone"></i>
+      <i class="ii ii-monitor-multiple" {{action "toggleScreenSharing"}} disabled={{isScreenSharingDisabled}} title="Enable your screen"></i>
+      <i class="ii ii-file-send" {{action "toggleFileSharing"}} disabled={{isFileSharingDisabled}} title="Select and share your files"></i>
+    </div>
+  </div>
+
+  {{#if isUsersContainerVisible}}
+    <div class="users-container"></div>
+  {{/if}}
+
+  <div class="main">
+    <div class="new-message" style="overflow: hidden;height: 250px;">
+      <div class="user-info" style="height: 100%">
+        <img src="images/user.png">
+      </div>
+
+      <div class="user-activity">
+        <p class="message">
+          Please Enter a <span style="color:red;">UNIQUE</span> room-name:
+          <input type="text" id="room-name" placeholder="Private Room-ID" style="border: 1px solid rgb(253, 253, 253);box-shadow: inset 0 0 0 1px rgb(53, 52, 52);outline: 1px solid rgb(7, 7, 7);" title="Your private rooms unique-id. It is required!">
+            {{roomname}}
+          </input>
+          <br />
+          <small>You can enter email; or any string or numbers!</small> <br />
+
+          <small style="color: rgb(1, 170, 143);font-style: italic;font-weight: bold;">You MUST <span style="color:red;">manually</span> share this <span style="color:red;">unique room-name</span> with target users so they can join you!</small> <br /><br />
+
+          Please Enter Your Full Name:
+          <input type="text" id="your-name" placeholder="(optional)" title="Optional but Recommended!">
+          <button id="continue" title="Click to join the room!" {{action "continue"}}>continue</button>
+        </p>
+      </div>
+    </div>
+
+    <div class="new-message" style="overflow: hidden;height: 300px;">
+      <div class="user-info" style="height: 100%">
+        <img src="images/help.png">
+      </div>
+
+      <div class="user-activity">
+        <p class="message"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{multi-chat/users-list}}
+
+{{multi-chat/message-sound}}
