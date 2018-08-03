@@ -48,14 +48,14 @@ export default Ember.Controller.extend({
     getElement(selector) {
         return document.querySelector(selector);
     },
-    getRandomColor() {
-        var letters = '0123456789ABCDEF'.split('');
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-            color += letters[Math.round(Math.random() * 15)];
-        }
-        return color;
-    },
+    // getRandomColor() {
+    //     var letters = '0123456789ABCDEF'.split('');
+    //     var color = '#';
+    //     for (var i = 0; i < 6; i++) {
+    //         color += letters[Math.round(Math.random() * 15)];
+    //     }
+    //     return color;
+    // },
     addNewMessage(args) {
         var messages = this.get("messages");
 
@@ -80,7 +80,7 @@ export default Ember.Controller.extend({
         },
         continue: function() {
             var rtcMultiConnection = this.get("rtcMultiConnection");
-            var yourName = this.parentNode.querySelector('#your-name');
+            var username = this.get("username") || "Anon";
             var roomName = this.get("roomname");
 
             if(!roomName.value || !roomName.value.length) {
@@ -91,8 +91,6 @@ export default Ember.Controller.extend({
             main.querySelector('#room-name').onkeyup();
 
             yourName.disabled = roomName.disabled = this.disabled = true;
-
-            var username = yourName.value || 'Anonymous';
 
             rtcMultiConnection.extra = {
                 username: username,
