@@ -7,8 +7,8 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+    this.route("chat");
     this.route("verify", function() {});
-    this.route("multi-chat", function() {});
     this.route('catch-all', { path: '*:' });
 });
 

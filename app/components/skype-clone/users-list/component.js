@@ -1,6 +1,8 @@
 import Ember from "ember";
 
 export default Ember.Component.extend({
+    rtcMultiConnection: null,
+
     isUsersContainerVisible: false,
     numberOfUsers: 1,
 
@@ -16,51 +18,56 @@ export default Ember.Component.extend({
             this.set("isUsersContainerVisible", true);
         },
         toggleWebcam: function() {
+            var rtcMultiConnection = this.get("rtcMultiConnection");
+
             this.set("isWebcamDisabled", false);
-            // var session = { audio: true, video: true };
-            //
-            // rtcMultiConnection.captureUserMedia(function(stream) {
-            //     var streamid = rtcMultiConnection.token();
-            //     rtcMultiConnection.customStreams[streamid] = stream;
-            //
-            //     rtcMultiConnection.sendMessage({
-            //         hasCamera: true,
-            //         streamid: streamid,
-            //         session: session
-            //     });
-            // }, session);
+            var session = { audio: true, video: true };
+
+            rtcMultiConnection.captureUserMedia(function(stream) {
+                var streamid = rtcMultiConnection.token();
+                rtcMultiConnection.customStreams[streamid] = stream;
+
+                rtcMultiConnection.sendMessage({
+                    hasCamera: true,
+                    streamid: streamid,
+                    session: session
+                });
+            }, session);
         },
         toggleMic: function() {
+            var rtcMultiConnection = this.get("rtcMultiConnection");
+
             this.set("isMicDisabled", false);
-            // var session = { audio: true };
-            //
-            // rtcMultiConnection.captureUserMedia(function(stream) {
-            //     var streamid = rtcMultiConnection.token();
-            //     rtcMultiConnection.customStreams[streamid] = stream;
-            //
-            //     rtcMultiConnection.sendMessage({
-            //         hasMic: true,
-            //         streamid: streamid,
-            //         session: session
-            //     });
-            // }, session);
+            var session = { audio: true };
+
+            rtcMultiConnection.captureUserMedia(function(stream) {
+                var streamid = rtcMultiConnection.token();
+                rtcMultiConnection.customStreams[streamid] = stream;
+
+                rtcMultiConnection.sendMessage({
+                    hasMic: true,
+                    streamid: streamid,
+                    session: session
+                });
+            }, session);
         },
         toggleScreenSharing: function() {
             this.set("isScreenSharingDisabled", false);
-            // var session = { screen: true };
-            //
-            // rtcMultiConnection.captureUserMedia(function(stream) {
-            //     var streamid = rtcMultiConnection.token();
-            //     rtcMultiConnection.customStreams[streamid] = stream;
-            //
-            //     rtcMultiConnection.sendMessage({
-            //         hasScreen: true,
-            //         streamid: streamid,
-            //         session: session
-            //     });
-            // }, session);
+            var rtcMultiConnection = this.get("rtcMultiConnection");
+            var session = { screen: true };
+
+            rtcMultiConnection.captureUserMedia(function(stream) {
+                var streamid = rtcMultiConnection.token();
+                rtcMultiConnection.customStreams[streamid] = stream;
+
+                rtcMultiConnection.sendMessage({
+                    hasScreen: true,
+                    streamid: streamid,
+                    session: session
+                });
+            }, session);
         },
-        toggleFileSharing: function() {
+        // toggleFileSharing: function() {
             // var file = document.createElement('input');
             // file.type = 'file';
             //
@@ -69,6 +76,6 @@ export default Ember.Component.extend({
             // };
             //
             // this.fireClickEvent(file);
-        },
+        // },
     }
 });
