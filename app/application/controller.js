@@ -45,9 +45,9 @@ export default Ember.Controller.extend({
         }
     }),
 
-    getElement(selector) {
-        return document.querySelector(selector);
-    },
+    // getElement(selector) {
+    //     return document.querySelector(selector);
+    // },
     // getRandomColor() {
     //     var letters = '0123456789ABCDEF'.split('');
     //     var color = '#';
@@ -56,10 +56,10 @@ export default Ember.Controller.extend({
     //     }
     //     return color;
     // },
-    addNewMessage(args) {
+    addNewMessage(options) {
         var messages = this.get("messages");
 
-        messages.pushObject(args);
+        messages.pushObject(options);
 
         this.set("messages", messages);
     },
@@ -75,8 +75,10 @@ export default Ember.Controller.extend({
     isFileSharingDisabled: true,
 
     actions: {
-        keyUp: function(event) {
-            console.log("test");
+        keyDown: function(event) {
+            if (event.keyCode === 16) {
+                this.set("isShiftKeyPressed", true);
+            }
         },
         continue: function() {
             var rtcMultiConnection = this.get("rtcMultiConnection");
@@ -129,13 +131,6 @@ export default Ember.Controller.extend({
 });
 
 // Event keycode 13 is "Enter"
-
-// NOTE: Still need to implement.
-// getElement('.main-input-box textarea').onkeydown = function(e) {
-//     if (e.keyCode == 16) {
-//         isShiftKeyPressed = true;
-//     }
-// };
 
 // NOTE: Still need to implement.
 // var numberOfKeys = 0;
