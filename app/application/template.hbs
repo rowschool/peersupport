@@ -1,54 +1,7 @@
-<div class="ps-device-list">
-  <p class="ps-device-list-header-text text-center">
-    This page requests user media in order to access names of devices, <br />
-    then re-enumerates devices and populates the select boxes.
-  </p>
+{{#skype-clone/users-list
+    rtcMultiConnection = rtcMultiConnection}}
+  {{skype-clone/settings
+    rtcMultiConnection = rtcMultiConnection}}
+{{/skype-clone/users-list}}
 
-  <table class="ps-device-list-capabilities">
-    <tr class="ps-device-list-capabilities-item">
-      <td class="ps-device-list-capabilities-item-label">{{title-case "audioCallCapable"}}:</td>
-      <td class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.audioCallCapable}}</td>
-    </tr>
-    <tr class="ps-device-list-capabilities-item">
-      <td class="ps-device-list-capabilities-item-label">{{title-case "videoCallCapable"}}:</td>
-      <td class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.videoCallCapable}}</td>
-    </tr>
-    <tr class="ps-device-list-capabilities-item">
-      <td class="ps-device-list-capabilities-item-label">{{title-case "callCapable"}}:</td>
-      <td class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.callCapable}}</td>
-    </tr>
-    <tr class="ps-device-list-capabilities-item">
-      <td class="ps-device-list-capabilities-item-label">{{title-case "hasMicPermission"}}:</td>
-      <td class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.hasMicPermission}}</td>
-    </tr>
-    <tr class="ps-device-list-capabilities-item">
-      <td class="ps-device-list-capabilities-item-label">{{title-case "hasMicrophone"}}:</td>
-      <td class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.hasMicrophone}}</td>
-    </tr>
-    <tr class="ps-device-list-capabilities-item">
-      <td class="ps-device-list-capabilities-item-label">{{title-case "hasCameraPermission"}}:</td>
-      <td class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.hasCameraPermission}}</td>
-    </tr>
-    <tr class="ps-device-list-capabilities-item">
-      <td class="ps-device-list-capabilities-item-label">{{title-case "hasCamera"}}:</td>
-      <td class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.hasCamera}}</td>
-    </tr>
-    <tr class="ps-device-list-capabilities-item">
-      <td class="ps-device-list-capabilities-item-label">{{title-case "canListDevices"}}:</td>
-      <td class="ps-device-list-capabilities-item-value">{{boolean-to-word webrtc.canListDevices}}</td>
-    </tr>
-  </table>
-
-  {{device-selection}}
-
-  {{!-- <h3>With Troubleshoot link</h3> --}}
-  {{!-- {{device-selection openTroubleshoot="openTroubleshoot"}} --}}
-
-  {{!-- <h3>No audio</h3> --}}
-  {{!-- {{device-selection audio=false}} --}}
-
-  {{!-- <h3>No video</h3> --}}
-  {{!-- {{device-selection video=false}} --}}
-</div>
-
-{{outlet}}
+{{skype-clone/sound}}

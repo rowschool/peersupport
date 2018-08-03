@@ -1,0 +1,24 @@
+<div class="users-list {{if isUsersContainerVisible "selected" ""}}" title="Click to view all shared screens and videos!" {{action "selectUsersList"}}>
+  <div class="numbers-of-users">{{numberOfUsers}}</div>
+  <!-- Users -->
+  <img src="images/users.png">
+</div>
+
+<div class="main-input-box">
+  <textarea placeholder="Send a message"></textarea>
+
+  <p id="who-is-typing"></p>
+
+  <div class="controls">
+    <i class="ii ii-webcam" {{action "toggleWebcam"}} disabled={{isWebcamDisabled}} title="Enable your webcam"></i>
+    <i class="ii ii-microphone" {{action "toggleMic"}} disabled={{isMicDisabled}} title="Enable your microphone"></i>
+    <i class="ii ii-monitor-multiple" {{action "toggleScreenSharing"}} disabled={{isScreenSharingDisabled}} title="Enable your screen"></i>
+    <i class="ii ii-file-send" {{action "toggleFileSharing"}} disabled={{isFileSharingDisabled}} title="Select and share your files"></i>
+  </div>
+</div>
+
+{{yield}}
+
+{{#if isUsersContainerVisible}}
+  <div class="users-container"></div>
+{{/if}}
