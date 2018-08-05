@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import Names from "peersupport/static/names";
 
 export default Ember.Controller.extend({
     rtcMultiConnection: Ember.computed(function() {
@@ -13,12 +14,6 @@ export default Ember.Controller.extend({
         get: function() {
             var username = window.localStorage.getItem("username");
 
-            if (username) {
-                return username;
-            }
-
-            // var roomname = (Math.random() * 1000).toString().replace('.', '');
-            window.localStorage.setItem("username", username);
             return username;
         },
         set: function(key, value) {
@@ -73,6 +68,14 @@ export default Ember.Controller.extend({
     isMicDisabled: true,
     isScreenSharingDisabled: true,
     isFileSharingDisabled: true,
+
+    init: function() {
+        var roomname = Names.generateRoomname(),
+            username = Names.generateUsername();
+
+        this.set("roomname", roomname);
+        this.set("username", username);
+    },
 
     actions: {
         keyDown: function(event) {
