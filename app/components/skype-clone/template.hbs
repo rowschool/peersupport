@@ -1,38 +1,56 @@
-{{skype-clone/messages
-  messages = messages}}
+<div class="chat-window-content">
+  <div class="chat-window-messages">
+    {{#each messages as |args|}}
+      <div class="new-message">
+        <div class="user-info">{{args.userinfo}} || '<img src="images/user.png">'</div>
+        <div class="user-activity">
+          <h2 class="header">{{args.header}}</h2>
+          <p class="message">{{args.message}}</p>
+        </div>
+      </div>
+    {{/each}}
+    {{!-- on init of new message: document.querySelector('#message-sound').play(); --}}
+    {{!-- {{skype-clone/sound}} --}}
 
-<div class="users-list {{if isUsersContainerVisible "selected" ""}}" title="Click to view all shared screens and videos!" {{action "selectUsersList"}}>
-  <div class="numbers-of-users">{{numberOfUsers}}</div>
-  Users
-</div>
+    <p id="who-is-typing"></p>
+  </div>
 
-<div class="main-input-box">
-  <p id="who-is-typing"></p>
+  <div class="chat-window-users-container">
+    <div class="chat-window-users-container-header">
+      <span class="chat-window-users-count">
+        {{numberOfUsers}} {{unless (is-equal numberOfUsers 1) "Users" "User"}}
+      </span>
 
-  <textarea placeholder="Send a message"></textarea>
+      <div class="chat-window-users-container-header-icons">
+        <i class="ii ii-people chat-window-display-user-screens-and-videos" {{action "selectUsersList"}}></i>
+        <i class="ii ii-settings" {{action "toggleDisplaySettings"}}></i>
+      </div>
 
-  <div class="controls">
-    <i class="ii ii-webcam" {{action "toggleWebcam"}} disabled={{isWebcamDisabled}} title="Enable your webcam"></i>
-    <i class="ii ii-microphone" {{action "toggleMic"}} disabled={{isMicDisabled}} title="Enable your microphone"></i>
-    <i class="ii ii-monitor-multiple" {{action "toggleScreenSharing"}} disabled={{isScreenSharingDisabled}} title="Enable your screen"></i>
-    {{!-- <i class="ii ii-file-send" {{action "toggleFileSharing"}} disabled={{isFileSharingDisabled}} title="Select and share your files"></i> --}}
+    </div>
+
+    <div class="chat-window-users-list"></div>
   </div>
 </div>
 
-{{#if isUsersContainerVisible}}
-  <div class="users-container"></div>
-{{/if}}
+<div class="chat-window-input">
+  <textarea class="chat-window-input-textarea" placeholder="Send a message"></textarea>
 
-{{skype-clone/sound}}
+  <div class="chat-window-input-controls">
+    <i class="ii ii-webcam" {{action "toggleWebcam"}} disabled={{isWebcamDisabled}} title="Enable your webcam"></i>
+    <i class="ii ii-microphone" {{action "toggleMic"}} disabled={{isMicDisabled}} title="Enable your microphone"></i>
+    <i class="ii ii-monitor-multiple" {{action "toggleScreenSharing"}} disabled={{isScreenSharingDisabled}} title="Enable your screen"></i>
+    <i class="ii ii-file-send" {{action "toggleFileSharing"}} disabled={{isFileSharingDisabled}} title="Select and share your files"></i>
 
-<div class="chat-window-settings">
-  {{#unless isDisplayingSettings}}
-    <i class="ii ii-settings" {{action "toggleDisplaySettings"}}></i>
-  {{else}}
-    {{#forms/modal-overlay
-        close = "closeSettingsPanel"}}
-      {{skype-clone/settings
-        rtcMultiConnection = rtcMultiConnection}}
-    {{/forms/modal-overlay}}
-  {{/unless}}
+    <div class="chat-window-input-send">
+      <button class="chat-window-input-send-button">Send</button>
+    </div>
+  </div>
 </div>
+
+{{#if isDisplayingSettings}}
+  {{#forms/modal-overlay
+      close = "closeSettingsPanel"}}
+    {{skype-clone/settings
+      rtcMultiConnection = rtcMultiConnection}}
+  {{/forms/modal-overlay}}
+{{/if}}

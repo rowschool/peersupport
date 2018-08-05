@@ -1,103 +1,118 @@
-<div class="settings-panel">
-    {{input type="checkbox" checked = autoTranslateText}}
-    <label for="autoTranslateText" title="Click to chat with users from different locales! All incoming text messages will be auto converted in your language!">Auto translate text into</label>
-    {{forms/menu-selector
-        selectedValue = selectedLanguage
-        options = languageOptions
-        changed = "selectedLanguageChanged"}}
+<h2 class="text-center">Settings</h2>
 
-    <button id="save-settings" style="float: right;" {{action "saveSettings"}}>Save Settings</button>
-    <table>
-        <tr>
-            <td>
-                <h2>Set Bandwidth</h2><br />
-                <label for="audio-bandwidth" class="adjust-width">Audio bandwidth</label>
-                {{input type="text" value="audioBandwidth" title="kbits/sec"}}<small>kbps</small>
-                <br />
-                <label for="video-bandwidth" class="adjust-width">Video bandwidth</label>
-                {{input type="text" value="videoBandwidth" title="kbits/sec"}}<small>kbps</small>
-            </td>
+<table>
+    <tr>
+        <td>
+            <h3>Set Bandwidth</h3>
 
-            <td>
-                <h2>Set Resolutions</h2><br />
-                <label for="video-width" class="adjust-width">Video Width</label>
-                {{input type="text" value=videoWidth title="You can use values like: 1920, 1280, 960, 640, 320, 320"}}
-                <br />
-                <label for="video-height" class="adjust-width">Video Height</label>
-                {{input type="text" value=videoHeight title="You can use values like: 1080, 720, 360, 480, 240, 180"}}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {{input type="checkbox" checked=preferSctp}}
-                <label for="prefer-sctp" title="Prefer using SCTP data channels. Otherwise, RTP data channels will be used.">Is Prefer SCTP Data Channels?</label><br />
+            <label for="audio-bandwidth" class="adjust-width">Audio bandwidth</label>
+            {{input type="text" value="audioBandwidth" title="kbits/sec"}}<small>kbps</small>
+            <br />
 
-                <label for="chunk-size" class="adjust-width">Chunk Size</label>
-                {{input type="text" value=chunkSize title="Chrome's sending limit is 64000 however Firefox's receiving limit is 16000."}} <small>chars</small> <br />
+            <label for="video-bandwidth" class="adjust-width">Video bandwidth</label>
+            {{input type="text" value="videoBandwidth" title="kbits/sec"}}<small>kbps</small>
+        </td>
 
-                <label for="chunk-interval" class="adjust-width">Chunk Interval</label>
-                {{input type="text" value=chunkInterval title="There must be an interval from 50ms to 500ms to make sure data isn't seamlessly skipped."}}<small>milliseconds</small><br /><br />
+        <td>
+            <h3>Set Resolutions</h3>
 
-                {{input type="checkbox" checked=skipRTCMultiConnectionLogs}}
-                <label for="skip-RTCMultiConnection-Logs" title="You can disable all RTCMultiConnection logs.">skip RTCMultiConnection Logs?</label>
-            </td>
+            <label for="video-width" class="adjust-width">Video Width</label>
+            {{input type="text" value=videoWidth title="You can use values like: 1920, 1280, 960, 640, 320, 320"}}
+            <br />
 
-            <td>
-                <h2>Select Devices</h2><br />
-                <label for="audio-devices">Audio Devices</label>
-                {{forms/menu-selector
-                    selectedValue = selectedAudioDevice
-                    options = audioDeviceOptions
-                    changed = "selectedAudioDeviceChanged"}}
-                <br />
-                <label for="video-devices">Video Devices</label>
-                {{forms/menu-selector
-                    selectedValue = selectedVideoDevice
-                    options = videoDeviceOptions
-                    changed = "selectedVideoDeviceChanged"}}
-            </td>
-        </tr>
+            <label for="video-height" class="adjust-width">Video Height</label>
+            {{input type="text" value=videoHeight title="You can use values like: 1080, 720, 360, 480, 240, 180"}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            {{input type="checkbox" checked=preferSctp}}
+            <label for="prefer-sctp" title="Prefer using SCTP data channels. Otherwise, RTP data channels will be used.">Is Prefer SCTP Data Channels?</label>
+            <br />
 
-        <tr>
-            <td>
-                <label for="max-participants-allowed">Max Participants Allowed?</label>
-                {{input type="text" value=maxParticipantsAllowed}}
+            <label for="chunk-size" class="adjust-width">Chunk Size</label>
+            {{input type="text" value=chunkSize title="Chrome's sending limit is 64000 however Firefox's receiving limit is 16000."}}
+            chars
+            <br />
 
-                {{input type="checkbox" checked=fakePeerConnection}}
-                <label for="fake-pee-connection" title="This feature works only on Chrome; it means that a few peer connection will be creates with no audio/video; and no data channels!">Setup Fake Peer Connection?</label>
-            </td>
+            <label for="chunk-interval" class="adjust-width">Chunk Interval</label>
+            {{input type="text" value=chunkInterval title="There must be an interval from 50ms to 500ms to make sure data isn't seamlessly skipped."}}
+            milliseconds
+            <br /><br />
 
-            <td>
-                <h2>Select Candidates</h2><br />
-                {{input type="checkbox" checked=preferStun}}
-                <label for="prefer-stun">Allow STUN Candidates?</label><br />
+            {{input type="checkbox" checked=skipRTCMultiConnectionLogs}}
+            <label for="skip-RTCMultiConnection-Logs" title="You can disable all RTCMultiConnection logs.">skip RTCMultiConnection Logs?</label>
+        </td>
 
-                {{input type="checkbox" checked=preferTurn}}
-                <label for="prefer-turn">Allow TURN Candidates?</label><br />
+        <td>
+            <h3>Select Devices</h3>
+            <label for="audio-devices">Audio Devices</label>
+            {{forms/menu-selector
+                selectedValue = selectedAudioDevice
+                options = audioDeviceOptions
+                changed = "selectedAudioDeviceChanged"}}
+            <br />
 
-                {{input type="checkbox" checked=preferHost}}
-                <label for="prefer-host">Allow Hose Candidates?</label>
-            </td>
-        </tr>
+            <label for="video-devices">Video Devices</label>
+            {{forms/menu-selector
+                selectedValue = selectedVideoDevice
+                options = videoDeviceOptions
+                changed = "selectedVideoDeviceChanged"}}
+        </td>
+    </tr>
 
-        <tr>
-            <td>
-                <h2>Set DataChannel Options</h2><br />
-                <label for="dataChannelDict">dataChannelDict</label>
-                {{input type="text" value=dataChannelDict}}
-            </td>
+    <tr>
+        <td>
+            <label for="max-participants-allowed">Max Participants Allowed?</label>
+            {{input type="text" value=maxParticipantsAllowed}}
+            <br /><br/>
 
-            <td>
-                <h2>Set SDP Constraints</h2><br />
-                {{input type="checkbox" checked=OfferToReceiveAudio}}
-                <label for="OfferToReceiveAudio">OfferToReceiveAudio</label><br />
+            {{input type="checkbox" checked=fakePeerConnection}}
+            <label for="fake-pee-connection" title="This feature works only on Chrome; it means that a few peer connection will be creates with no audio/video; and no data channels!">Setup Fake Peer Connection?</label>
+            <br /><br/>
 
-                {{input type="checkbox" checked=OfferToReceiveVideo}}
-                <label for="OfferToReceiveVideo">OfferToReceiveVideo</label><br />
+            {{input type="checkbox" checked = autoTranslateText}}
+            <label for="autoTranslateText" title="Click to chat with users from different locales! All incoming text messages will be auto converted in your language!">Auto translate text into</label>
+            {{forms/menu-selector
+                selectedValue = selectedLanguage
+                options = languageOptions
+                changed = "selectedLanguageChanged"}}
+        </td>
 
-                {{input type="checkbox" checked=IceRestart}}
-                <label for="IceRestart">IceRestart</label>
-            </td>
-        </tr>
-    </table>
+        <td>
+            <h3>Select Candidates</h3>
+            {{input type="checkbox" checked=preferStun}}
+            <label for="prefer-stun">Allow STUN Candidates?</label><br />
+
+            {{input type="checkbox" checked=preferTurn}}
+            <label for="prefer-turn">Allow TURN Candidates?</label><br />
+
+            {{input type="checkbox" checked=preferHost}}
+            <label for="prefer-host">Allow Hose Candidates?</label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <h3>Set DataChannel Options</h3>
+            <label for="dataChannelDict">dataChannelDict</label>
+            {{input type="text" value=dataChannelDict}}
+        </td>
+
+        <td>
+            <h3>Set SDP Constraints</h3>
+            {{input type="checkbox" checked=OfferToReceiveAudio}}
+            <label for="OfferToReceiveAudio">OfferToReceiveAudio</label><br />
+
+            {{input type="checkbox" checked=OfferToReceiveVideo}}
+            <label for="OfferToReceiveVideo">OfferToReceiveVideo</label><br />
+
+            {{input type="checkbox" checked=IceRestart}}
+            <label for="IceRestart">IceRestart</label>
+        </td>
+    </tr>
+</table>
+
+<div class="chat-window-settings-panel-save-button">
+  <button {{action "saveSettings"}}>Save Settings</button>
 </div>

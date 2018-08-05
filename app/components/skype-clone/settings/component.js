@@ -2,6 +2,8 @@ import Ember from "ember";
 import Languages from "peersupport/static/languages";
 
 export default Ember.Component.extend({
+    classNames: ["chat-window-settings-panel"],
+
     rtcMultiConnection: null,
 
     languageOptions: Languages,

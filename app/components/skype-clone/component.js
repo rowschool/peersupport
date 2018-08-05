@@ -1,11 +1,12 @@
 import Ember from "ember";
 
 export default Ember.Component.extend({
+    // TODO: Make query params contain the channel name.
+
     classNames: ["chat-window"],
 
     rtcMultiConnection: null,
 
-    isUsersContainerVisible: false,
     numberOfUsers: 1,
 
     isWebcamDisabled: true,
@@ -13,12 +14,7 @@ export default Ember.Component.extend({
     isScreenSharingDisabled: true,
     isFileSharingDisabled: true,
 
-    // NOTE: These commented lines should be in the calling component.
     actions: {
-        selectUsersList: function() {
-            this.toggleProperty("isUsersContainerVisible");
-            this.set("isUsersContainerVisible", true);
-        },
         toggleWebcam: function() {
             var rtcMultiConnection = this.get("rtcMultiConnection");
 
@@ -69,16 +65,17 @@ export default Ember.Component.extend({
                 });
             }, session);
         },
-        // toggleFileSharing: function() {
-            // var file = document.createElement('input');
-            // file.type = 'file';
-            //
-            // file.onchange = function() {
-            //     rtcMultiConnection.send(this.files[0]);
-            // };
-            //
-            // this.fireClickEvent(file);
-        // },
+        toggleFileSharing: function() {
+            var rtcMultiConnection = this.get("rtcMultiConnection");
+            var file = document.createElement('input');
+            file.type = 'file';
+
+            file.onchange = function() {
+                rtcMultiConnection.send(this.files[0]);
+            };
+
+            this.fireClickEvent(file);
+        },
         toggleDisplaySettings: function() {
             this.toggleProperty("isDisplayingSettings");
         },
