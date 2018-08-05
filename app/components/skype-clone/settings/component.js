@@ -4,7 +4,6 @@ import Languages from "peersupport/static/languages";
 export default Ember.Component.extend({
     rtcMultiConnection: null,
 
-    isDisplayingSettings: false,
     languageOptions: Languages,
     devices: null,
     audioDeviceOptions: Ember.computed.alias("devices.audioDevices"),
@@ -63,9 +62,6 @@ export default Ember.Component.extend({
     },
 
     actions: {
-        toggleDisplaySettings: function() {
-            this.toggleProperty("isDisplayingSettings");
-        },
         selectedLanguageChanged: function(value) {
             this.set("selectedLanguage", value);
         },

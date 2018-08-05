@@ -1,10 +1,3 @@
-{{#unless isDisplayingSettings}}
-<div class="settings">
-    <button id="settings" {{action "toggleDisplaySettings"}} title="Customize many options according to your own needs!">Settings</button>
-</div>
-{{/unless}}
-
-{{#if isDisplayingSettings}}
 <div class="settings-panel">
     {{input type="checkbox" checked = autoTranslateText}}
     <label for="autoTranslateText" title="Click to chat with users from different locales! All incoming text messages will be auto converted in your language!">Auto translate text into</label>
@@ -108,4 +101,3 @@
         </tr>
     </table>
 </div>
-{{/if}}

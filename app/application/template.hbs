@@ -34,16 +34,6 @@
     {{/unless}}
 </div>
 {{else}}
-  <div class="chat">
-    {{skype-clone/messages
-        messages = messages}}
-
-    {{#skype-clone/users-list
-        rtcMultiConnection = rtcMultiConnection}}
-      {{skype-clone/settings
-        rtcMultiConnection = rtcMultiConnection}}
-    {{/skype-clone/users-list}}
-
-    {{skype-clone/sound}}
-  </div>
+  {{skype-clone
+    rtcMultiConnection = rtcMultiConnection}}
 {{/unless}}

@@ -97,7 +97,6 @@ export default Ember.Controller.extend({
 
             rtcMultiConnection.channel = roomName;
 
-            // this.transitionToRoute("chat", roomName);
             var websocket = new WebSocket(SIGNALING_SERVER);
 
             websocket.onmessage = function(event) {

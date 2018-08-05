@@ -1,0 +1,33 @@
+.modal-overlay-root {
+    position: fixed;
+    z-index: 9999;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    bottom: 0px;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+.ic-overlay-background(@zIndex) {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(140, 140, 140, 0.8);
+    z-index: @zIndex;
+}
+
+.modal-overlay-background {
+    .ic-overlay-background("auto");
+}
+
+.modal-overlay-content {
+    position: relative;
+    margin: 20px auto;
+    border: 1px solid black;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
+    width: max-content;
+    background-color: white;
+}

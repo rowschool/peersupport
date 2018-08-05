@@ -1,6 +1,8 @@
 import Ember from "ember";
 
 export default Ember.Component.extend({
+    classNames: ["chat-window"],
+
     rtcMultiConnection: null,
 
     isUsersContainerVisible: false,
@@ -77,5 +79,11 @@ export default Ember.Component.extend({
             //
             // this.fireClickEvent(file);
         // },
+        toggleDisplaySettings: function() {
+            this.toggleProperty("isDisplayingSettings");
+        },
+        closeSettingsPanel: function() {
+            this.set("isDisplayingSettings", false);
+        }
     }
 });
