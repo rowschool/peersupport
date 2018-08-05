@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Ember from "ember";
 import Names from "peersupport/static/names";
 
 export default Ember.Controller.extend({
@@ -30,7 +30,7 @@ export default Ember.Controller.extend({
                 return localName;
             }
 
-            var roomname = (Math.random() * 1000).toString().replace('.', '');
+            var roomname = (Math.random() * 1000).toString().replace(".", "");
             window.localStorage.setItem("roomname", roomname);
             return roomname;
         },
@@ -39,18 +39,14 @@ export default Ember.Controller.extend({
             return value;
         }
     }),
+    fieldsAreEmpty: Ember.computed("username", "username.length", "roomname", "roomname.length", function() {
+        var username = this.get("username"),
+            roomname = this.get("roomname");
 
-    // getElement(selector) {
-    //     return document.querySelector(selector);
-    // },
-    // getRandomColor() {
-    //     var letters = '0123456789ABCDEF'.split('');
-    //     var color = '#';
-    //     for (var i = 0; i < 6; i++) {
-    //         color += letters[Math.round(Math.random() * 15)];
-    //     }
-    //     return color;
-    // },
+        return !username || (username && username.length === 0) ||
+                !roomname || (roomname && roomname.length === 0);
+    }),
+
     addNewMessage(options) {
         var messages = this.get("messages");
 
@@ -59,7 +55,7 @@ export default Ember.Controller.extend({
         this.set("messages", messages);
     },
     getUserinfo(blobURL, imageURL) {
-        return blobURL ? '<video src="' + blobURL + '" autoplay controls></video>' : '<img src="' + imageURL + '">';
+        return blobURL ? `<video src=${blobURL} autoplay controls></video>` : `<img src="${imageURL}">`;
     },
     isUsersContainerVisible: false,
     numberOfUsers: 1,
@@ -88,47 +84,20 @@ export default Ember.Controller.extend({
             var username = this.get("username") || "Anon";
             var roomName = this.get("roomname");
 
-            if(!roomName.value || !roomName.value.length) {
-                roomName.focus();
-                return alert('Your MUST Enter Room Name!');
-            }
+            // main.querySelector("#room-name").onkeyup();
 
-            main.querySelector('#room-name').onkeyup();
-
-            yourName.disabled = roomName.disabled = this.disabled = true;
+            // yourName.disabled = roomName.disabled = this.disabled = true;
 
             rtcMultiConnection.extra = {
                 username: username,
                 color: "red",
             };
 
-            console.log('Searching for existing rooms...');
-
-            // var roomid = main.querySelector('#room-name').value;
+            console.log("Searching for existing rooms...");
 
             rtcMultiConnection.channel = roomName;
 
-            var websocket = new WebSocket(SIGNALING_SERVER);
-
-            websocket.onmessage = function(event) {
-                var data = JSON.parse(event.data);
-                if (data.isChannelPresent == false) {
-                    console.log('No room found. Creating new room...<br /><br />You can share following room-id with your friends: <input type=text value="' + roomname + '">',);
-
-                    rtcMultiConnection.open();
-                } else {
-                    console.log('Room found. Joining the room...');
-
-                    rtcMultiConnection.join(roomName);
-                }
-            };
-
-            websocket.onopen = function() {
-                websocket.send(JSON.stringify({
-                    checkPresence: true,
-                    channel: roomName
-                }));
-            };
+            this.transitionToRoute("chat");
         }
     }
 });
@@ -137,7 +106,7 @@ export default Ember.Controller.extend({
 
 // NOTE: Still need to implement.
 // var numberOfKeys = 0;
-// getElement('.main-input-box textarea').onkeyup = function(e) {
+// getElement(".main-input-box textarea").onkeyup = function(e) {
 //     numberOfKeys++;
 //     if (numberOfKeys > 3) numberOfKeys = 0;
 //
@@ -166,14 +135,14 @@ export default Ember.Controller.extend({
 //
 //     addNewMessage({
 //         header: rtcMultiConnection.extra.username,
-//         message: 'Your Message:<br /><br />' + linkify(this.value),
-//         userinfo: this.getUserinfo(rtcMultiConnection.blobURLs[rtcMultiConnection.userid], 'images/chat-message.png'),
+//         message: "Your Message:<br /><br />" + linkify(this.value),
+//         userinfo: this.getUserinfo(rtcMultiConnection.blobURLs[rtcMultiConnection.userid], "images/chat-message.png"),
 //         color: rtcMultiConnection.extra.color
 //     });
 //
 //     rtcMultiConnection.send(this.value);
 //
-//     this.value = '';
+//     this.value = "";
 //
 //     numberOfKeys = 0;
 // }

@@ -22,9 +22,15 @@
         title="Optional but Recommended!"}}
     </div>
 
-    <div class="button channel-form-submit" title="Click to join the room!" {{action "continue"}}>
-      Continue
-    </div>
+    {{#unless fieldsAreEmpty}}
+      <div class="button channel-form-submit" title="Click to join the room!" {{action "continue"}}>
+        Continue
+      </div>
+    {{else}}
+      <div class="channel-form-warning">
+        Some required fields are missing.
+      </div>
+    {{/unless}}
 </div>
 
 {{!-- TODO: Navigate to chat route after creating channel... --}}
