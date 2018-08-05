@@ -1,3 +1,4 @@
+{{#unless server}}
 <div class="channel-form">
     <div class="channel-form-roomname">
       <label for="roomname">Room Name:</label>
@@ -18,7 +19,7 @@
         name="username"
         type="text"
         value=username
-        placeholder="(optional)"
+        placeholder="Username"
         title="Optional but Recommended!"}}
     </div>
 
@@ -32,5 +33,17 @@
       </div>
     {{/unless}}
 </div>
+{{else}}
+  <div class="chat">
+    {{skype-clone/messages
+        messages = messages}}
 
-{{!-- TODO: Navigate to chat route after creating channel... --}}
+    {{#skype-clone/users-list
+        rtcMultiConnection = rtcMultiConnection}}
+      {{skype-clone/settings
+        rtcMultiConnection = rtcMultiConnection}}
+    {{/skype-clone/users-list}}
+
+    {{skype-clone/sound}}
+  </div>
+{{/unless}}
