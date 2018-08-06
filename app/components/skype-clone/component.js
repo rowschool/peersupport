@@ -2,10 +2,13 @@ import Ember from "ember";
 
 export default Ember.Component.extend({
     // TODO: Make query params contain the channel name.
+    // Detect as if going through submit action if URL with query param is passed in
+    // Force username if not previously existing
 
     classNames: ["chat-window"],
 
     rtcMultiConnection: null,
+    roomname: "",
     isShiftKeyPressed: false,
 
     numberOfUsers: 1,
@@ -61,7 +64,6 @@ export default Ember.Component.extend({
             if (event.keyCode !== 13) {
                 return;
             } else {
-                // debugger;
                 var newMessage = {
                     header: rtcMultiConnection.extra.username,
                     message: window.linkify(newMessageValue),
@@ -76,12 +78,6 @@ export default Ember.Component.extend({
 
                 this.set("newMessageValue", "");
                 this.set("numberOfKeys", 0);
-
-                // element.scrollTop = element.scrollHeight;
-                // debugger;
-                // Ember.$.(".chat-window-messages")
-
-
             }
         },
 
@@ -145,6 +141,12 @@ export default Ember.Component.extend({
             };
 
             this.fireClickEvent(file);
+        },
+        selectUsersList: function() {
+            var rtcMultiConnection = this.get("rtcMultiConnection");
+            // TODO: Fetch all user webcams and shared screens.
+            // Then fix getUserinfo method in this controller.
+            // debugger;
         },
         toggleDisplaySettings: function() {
             this.toggleProperty("isDisplayingSettings");

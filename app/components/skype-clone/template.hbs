@@ -1,12 +1,14 @@
 <div class="chat-window-content">
   <div class="chat-window-messages">
+    <div class="chat-window-roomname">
+      {{roomname}}
+    </div>
+
     {{#each messages as |args|}}
       <div class="chat-window-message">
         <span class="chat-window-message-user">{{args.header}}</span>
         <div class="chat-window-message-text">{{{args.message}}}</div>
         {{!-- {{log "args.userinfo" args.userinfo}} --}}
-        {{!-- <div class="chat-window-message-user">{{args.header}}</div>
-        <div class="chat-window-message-text">{{args.message}}</div> --}}
       </div>
     {{/each}}
     {{!-- on init of new message: document.querySelector('#message-sound').play(); --}}
