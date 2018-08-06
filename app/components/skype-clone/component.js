@@ -6,6 +6,7 @@ export default Ember.Component.extend({
     classNames: ["chat-window"],
 
     rtcMultiConnection: null,
+    isShiftKeyPressed: false,
 
     numberOfUsers: 1,
 
@@ -14,7 +15,76 @@ export default Ember.Component.extend({
     isScreenSharingDisabled: true,
     isFileSharingDisabled: true,
 
+    numberOfKeys: 0,
+    newMessageValue: null,
+    messages: [],
+
+    // getUserinfo: function(blobURL, imageURL) {
+    //     return blobURL ? `<video src=${blobURL} autoplay controls></video>` : `<img src="${imageURL}">`;
+    // },
+
     actions: {
+        scrollMessages: function(event) {
+            Ember.$(".chat-window-messages").scrollTop(Ember.$(".chat-window-messages").height());
+        },
+        sendMessage: function(event) {
+            var rtcMultiConnection = this.get("rtcMultiConnection");
+            var isShiftKeyPressed = this.get("isShiftKeyPressed");
+            var numberOfKeys = this.get("numberOfKeys") + 1;
+            var newMessageValue = this.get("newMessageValue")
+
+            if (this.get("numberOfKeys") > 3) {
+                this.set("numberOfKeys", 0);
+            }
+
+            if (!numberOfKeys) {
+                if (event.keyCode === 8) {
+                    rtcMultiConnection.send({
+                        stoppedTyping: true
+                    });
+
+                    rtcMultiConnection.send({
+                        typing: true
+                    });
+                }
+            }
+
+            if (isShiftKeyPressed) {
+                if (event.keyCode === 16) {
+                    this.set("isShiftKeyPressed", false); // send action too?
+                }
+            }
+
+            this.set("numberOfKeys", numberOfKeys);
+
+            // event keycode 13 is "Enter"
+            if (event.keyCode !== 13) {
+                return;
+            } else {
+                // debugger;
+                var newMessage = {
+                    header: rtcMultiConnection.extra.username,
+                    message: window.linkify(newMessageValue),
+                    // userinfo: this.getUserinfo(rtcMultiConnection.blobURLs[rtcMultiConnection.userid], "images/chat-message.png")
+                }
+
+                var messages = this.get("messages");
+                messages.pushObject(newMessage);
+                this.set("messages", messages);
+
+                rtcMultiConnection.send(newMessageValue);
+
+                this.set("newMessageValue", "");
+                this.set("numberOfKeys", 0);
+
+                // element.scrollTop = element.scrollHeight;
+                // debugger;
+                // Ember.$.(".chat-window-messages")
+
+
+            }
+        },
+
         toggleWebcam: function() {
             var rtcMultiConnection = this.get("rtcMultiConnection");
 

@@ -20,7 +20,41 @@ video {
     float: left;
     height: 100%;
     width: 75%;
-    background-color: #ddd;
+    overflow-y: scroll;
+}
+
+.chat-window-message {
+    margin: 0;
+    position: relative;
+    font-size: 16px;
+    cursor: default;
+    padding: 5px 20px 5px 5px;
+    height: auto;
+
+    &:nth-child(2n+1) {
+        background-color: #eee;
+    }
+
+    &:nth-child(2n) {
+        background-color: #ddd;
+    }
+}
+
+.chat-window-message-user {
+    display: block;
+    margin-bottom: 5px;
+    padding-top: 2px;
+    padding-left: 2px;
+}
+
+.chat-window-message-text {
+    text-overflow: clip;
+    padding: 5px;
+    max-height: 100px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    background-color: #bbb;
+    margin: 5px 0px;
 }
 
 .chat-window-users-container {

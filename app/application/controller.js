@@ -54,9 +54,7 @@ export default Ember.Controller.extend({
 
         this.set("messages", messages);
     },
-    getUserinfo(blobURL, imageURL) {
-        return blobURL ? `<video src=${blobURL} autoplay controls></video>` : `<img src="${imageURL}">`;
-    },
+
     isUsersContainerVisible: false,
     numberOfUsers: 1,
 
@@ -126,48 +124,3 @@ export default Ember.Controller.extend({
         }
     }
 });
-
-// Event keycode 13 is "Enter"
-
-// NOTE: Still need to implement.
-// var numberOfKeys = 0;
-// getElement(".main-input-box textarea").onkeyup = function(e) {
-//     numberOfKeys++;
-//     if (numberOfKeys > 3) numberOfKeys = 0;
-//
-//     if (!numberOfKeys) {
-//         // 8 is backspace
-//         if (e.keyCode === 8) {
-//             return rtcMultiConnection.send({
-//                 stoppedTyping: true
-//             });
-//         }
-//
-//         rtcMultiConnection.send({
-//             typing: true
-//         });
-//     }
-//
-//     if (isShiftKeyPressed) {
-//         if (e.keyCode == 16) {
-//             isShiftKeyPressed = false;
-//         }
-//         return;
-//     }
-//
-//
-//     if (e.keyCode != 13) return;
-//
-//     addNewMessage({
-//         header: rtcMultiConnection.extra.username,
-//         message: "Your Message:<br /><br />" + linkify(this.value),
-//         userinfo: this.getUserinfo(rtcMultiConnection.blobURLs[rtcMultiConnection.userid], "images/chat-message.png"),
-//         color: rtcMultiConnection.extra.color
-//     });
-//
-//     rtcMultiConnection.send(this.value);
-//
-//     this.value = "";
-//
-//     numberOfKeys = 0;
-// }
