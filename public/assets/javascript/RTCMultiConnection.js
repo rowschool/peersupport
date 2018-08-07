@@ -7,6 +7,7 @@
 
     // www.RTCMultiConnection.org/docs/constructor/
     window.RTCMultiConnection = function(channel) {
+        console.log("Initialize RTCMultiConnection", channel);
         // an instance of constructor
         var connection = this;
 
@@ -22,6 +23,7 @@
 
         // www.RTCMultiConnection.org/docs/open/
         connection.open = function(args) {
+            console.log("RTCMultiConnection open", args);
             connection.isAcceptNewSession = false;
 
             // www.RTCMultiConnection.org/docs/session-initiator/
@@ -78,14 +80,16 @@
                 }
 
                 // for session-initiator, user-media is captured as soon as "open" is invoked.
-                if (!rtcMultiSession.captureUserMediaOnDemand) captureUserMedia(function() {
-                    rtcMultiSession.initSession({
-                        sessionDescription: connection.sessionDescription,
-                        dontTransmit: dontTransmit
-                    });
+                if (!rtcMultiSession.captureUserMediaOnDemand) {
+                    captureUserMedia(function() {
+                        rtcMultiSession.initSession({
+                            sessionDescription: connection.sessionDescription,
+                            dontTransmit: dontTransmit
+                        });
 
-                    invokeMediaCaptured(connection);
-                });
+                        invokeMediaCaptured(connection);
+                    });
+                }
 
                 if (rtcMultiSession.captureUserMediaOnDemand) {
                     rtcMultiSession.initSession({
@@ -94,11 +98,14 @@
                     });
                 }
             });
+
             return connection.sessionDescription;
         };
 
         // www.RTCMultiConnection.org/docs/connect/
         connection.connect = function(sessionid) {
+            console.log("RTCMultiConnection connect", sessionid);
+
             // a channel can contain multiple rooms i.e. sessions
             if (sessionid) {
                 connection.sessionid = sessionid;
@@ -117,6 +124,7 @@
 
         // www.RTCMultiConnection.org/docs/send/
         connection.send = function(data, _channel) {
+            console.log("RTCMultiConnection send", data, _channel);
             if (connection.numberOfConnectedUsers <= 0) {
                 // no connections
                 setTimeout(function() {
@@ -182,6 +190,7 @@
         };
 
         function initRTCMultiSession(onSignalingReady) {
+            console.log("RTCMultiConnection initRTCMultiSession", onSignalingReady);
             if (screenFrame) {
                 loadScreenFrame();
             }
@@ -195,11 +204,15 @@
         }
 
         connection.disconnect = function() {
+            console.log("RTCMultiConnection disconnect");
+
             if (rtcMultiSession) rtcMultiSession.disconnect();
             rtcMultiSession = null;
         };
 
         function joinSession(session, joinAs) {
+            console.log("RTCMultiConnection joinSession", session, joinAs);
+
             if (isString(session)) {
                 connection.skipOnNewSession = true;
             }
@@ -272,6 +285,7 @@
         // www.RTCMultiConnection.org/docs/captureUserMedia/
 
         function captureUserMedia(callback, _session, dontCheckChromExtension) {
+            console.log("RTCMultiConnection captureUserMedia", callback, _session, dontCheckChromExtension);
             // capture user's media resources
             var session = _session || connection.session;
 
@@ -388,6 +402,7 @@
                     listenEventHandler('message', onIFrameCallback);
 
                     function onIFrameCallback(event) {
+                        console.log("RTCMultiConnection onIFrameCallback", event);
                         if (event.data && event.data.chromeMediaSourceId) {
                             // this event listener is no more needed
                             window.removeEventListener('message', onIFrameCallback);
@@ -485,6 +500,7 @@
             } else _captureUserMedia(constraints, callback, session.audio && !session.video);
 
             function _captureUserMedia(forcedConstraints, forcedCallback, isRemoveVideoTracks, dontPreventSSLAutoAllowed) {
+                console.log("RTCMultiConnection _captureUserMedia", forcedConstraints, forcedCallback, isRemoveVideoTracks, dontPreventSSLAutoAllowed);
                 connection.onstatechange({
                     userid: 'browser',
                     extra: {},
@@ -662,6 +678,7 @@
         }
 
         function onStreamSuccessCallback(stream, returnBack, idInstance, streamid, forcedConstraints, forcedCallback, isRemoveVideoTracks, screen_constraints, constraints, session) {
+            console.log("RTCMultiConnection onStreamSuccessCallback (arguments)", arguments);
             if (!streamid) streamid = getRandomString();
 
             connection.onstatechange({
@@ -779,6 +796,7 @@
 
         // www.RTCMultiConnection.org/docs/leave/
         connection.leave = function(userid) {
+            console.log("RTCMultiConnection leave", userid);
             if (!rtcMultiSession) return;
 
             isFirstSession = true;
@@ -793,6 +811,7 @@
 
         // www.RTCMultiConnection.org/docs/eject/
         connection.eject = function(userid) {
+            console.log("RTCMultiConnection eject", userid);
             if (!connection.isInitiator) throw 'Only session-initiator can eject a user.';
             if (!connection.peers[userid]) throw 'You ejected invalid user.';
             connection.peers[userid].sendCustomMessage({
@@ -802,6 +821,7 @@
 
         // www.RTCMultiConnection.org/docs/close/
         connection.close = function() {
+            console.log("RTCMultiConnection close");
             // close entire session
             connection.autoCloseEntireSession = true;
             connection.leave();
@@ -809,6 +829,7 @@
 
         // www.RTCMultiConnection.org/docs/renegotiate/
         connection.renegotiate = function(stream, session) {
+            console.log("RTCMultiConnection renegotiate", stream, session);
             if (connection.numberOfConnectedUsers <= 0) {
                 // no connections
                 setTimeout(function() {
@@ -827,6 +848,7 @@
         };
 
         connection.attachExternalStream = function(stream, isScreen) {
+            console.log("RTCMultiConnection attachExternalStream", stream, isScreen);
             var constraints = {};
             if (stream.getAudioTracks && stream.getAudioTracks().length) {
                 constraints.audio = true;
@@ -846,6 +868,8 @@
 
         // www.RTCMultiConnection.org/docs/addStream/
         connection.addStream = function(session, socket) {
+            console.log("RTCMultiConnection addStream", session, socket);
+
             // www.RTCMultiConnection.org/docs/renegotiation/
 
             if (connection.numberOfConnectedUsers <= 0) {
@@ -884,6 +908,7 @@
 
         // www.RTCMultiConnection.org/docs/removeStream/
         connection.removeStream = function(streamid, dontRenegotiate) {
+            console.log("RTCMultiConnection removeStream", streamid, dontRenegotiate);
             if (connection.numberOfConnectedUsers <= 0) {
                 // no connections
                 setTimeout(function() {
@@ -975,6 +1000,7 @@
         };
 
         connection.switchStream = function(session) {
+            // TODO: console.log("RTCMultiConnection switchStream", session);
             if (connection.numberOfConnectedUsers <= 0) {
                 // no connections
                 setTimeout(function() {

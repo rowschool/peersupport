@@ -5,6 +5,9 @@ export default Ember.Component.extend({
     // Detect as if going through submit action if URL with query param is passed in
     // Force username if not previously existing
 
+    // NOTE: The constructor is:
+    // window.RTCMultiConnection = function(channel) {
+
     classNames: ["chat-window"],
 
     rtcMultiConnection: null,
@@ -30,7 +33,6 @@ export default Ember.Component.extend({
         },
         sendMessage: function(event) {
             var rtcMultiConnection = this.get("rtcMultiConnection");
-            var isShiftKeyPressed = this.get("isShiftKeyPressed");
             var newMessageValue = this.get("newMessageValue")
 
             if (event.keyCode === 8) {

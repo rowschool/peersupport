@@ -67,6 +67,7 @@ rtcMultiConnection.session.data = true;
 rtcMultiConnection.autoTranslateText = false;
 
 rtcMultiConnection.onopen = function(e) {
+    console.log("onopen", e);
     addNewMessage({
         header: e.extra.username,
         message: 'Data connection is opened between you and ' + e.extra.username + '.',
