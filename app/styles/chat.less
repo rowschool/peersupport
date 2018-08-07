@@ -69,13 +69,31 @@ video {
 }
 
 .chat-window-users-container-header-icons {
+    display: flex;
     position: absolute;
     right: 0;
+}
+
+.chat-window-display-user-screens-and-videos-icon {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
 
     .ii {
-        cursor: pointer;
-        font-size: 32px;
+        font-size: 24px;
+        text-align: center;
     }
+
+    .chat-window-users-count {
+        font-size: 18px;
+        margin: 0 auto;
+    }
+}
+
+.chat-window-settings-icon {
+    font-size: 42px;
+    display: inline;
+    cursor: pointer;
 }
 
 .chat-window-input {

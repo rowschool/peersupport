@@ -9,7 +9,6 @@ export default Ember.Component.extend({
 
     rtcMultiConnection: null,
     roomname: "",
-    isShiftKeyPressed: false,
 
     numberOfUsers: 1,
 
@@ -18,7 +17,6 @@ export default Ember.Component.extend({
     isScreenSharingDisabled: true,
     isFileSharingDisabled: true,
 
-    numberOfKeys: 0,
     newMessageValue: null,
     messages: [],
 
@@ -33,37 +31,23 @@ export default Ember.Component.extend({
         sendMessage: function(event) {
             var rtcMultiConnection = this.get("rtcMultiConnection");
             var isShiftKeyPressed = this.get("isShiftKeyPressed");
-            var numberOfKeys = this.get("numberOfKeys") + 1;
             var newMessageValue = this.get("newMessageValue")
 
-            if (this.get("numberOfKeys") > 3) {
-                this.set("numberOfKeys", 0);
+            if (event.keyCode === 8) {
+                rtcMultiConnection.send({
+                    stoppedTyping: true
+                });
             }
 
-            if (!numberOfKeys) {
-                if (event.keyCode === 8) {
-                    rtcMultiConnection.send({
-                        stoppedTyping: true
-                    });
-
-                    rtcMultiConnection.send({
-                        typing: true
-                    });
-                }
+            if (this.get("newMessageValue.length") > 3) {
+                rtcMultiConnection.send({
+                    typing: true
+                });
             }
-
-            if (isShiftKeyPressed) {
-                if (event.keyCode === 16) {
-                    this.set("isShiftKeyPressed", false); // send action too?
-                }
-            }
-
-            this.set("numberOfKeys", numberOfKeys);
 
             // event keycode 13 is "Enter"
-            if (event.keyCode !== 13) {
-                return;
-            } else {
+            if (event.keyCode === 13) {
+                debugger;
                 var newMessage = {
                     header: rtcMultiConnection.extra.username,
                     message: window.linkify(newMessageValue),
@@ -77,7 +61,6 @@ export default Ember.Component.extend({
                 rtcMultiConnection.send(newMessageValue);
 
                 this.set("newMessageValue", "");
-                this.set("numberOfKeys", 0);
             }
         },
 

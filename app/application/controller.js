@@ -8,8 +8,6 @@ export default Ember.Controller.extend({
 
     messages: [],
 
-    isShiftKeyPressed: false,
-
     username: Ember.computed({
         get: function() {
             var username = window.localStorage.getItem("username");
@@ -72,11 +70,6 @@ export default Ember.Controller.extend({
     },
 
     actions: {
-        keyDown: function(event) {
-            if (event.keyCode === 16) {
-                this.set("isShiftKeyPressed", true);
-            }
-        },
         continue: function() {
             var rtcMultiConnection = this.get("rtcMultiConnection");
             var username = this.get("username") || "Anon";

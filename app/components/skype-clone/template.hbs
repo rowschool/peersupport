@@ -1,9 +1,5 @@
 <div class="chat-window-content">
   <div class="chat-window-messages">
-    <div class="chat-window-roomname">
-      {{roomname}}
-    </div>
-
     {{#each messages as |args|}}
       <div class="chat-window-message">
         <span class="chat-window-message-user">{{args.header}}</span>
@@ -19,13 +15,21 @@
 
   <div class="chat-window-users-container">
     <div class="chat-window-users-container-header">
-      <span class="chat-window-users-count">
-        {{numberOfUsers}} {{unless (is-equal numberOfUsers 1) "Users" "User"}}
-      </span>
+      <div class="chat-window-roomname">
+        {{roomname}}
+      </div>
 
       <div class="chat-window-users-container-header-icons">
-        <i class="ii ii-people chat-window-display-user-screens-and-videos" {{action "selectUsersList"}}></i>
-        <i class="ii ii-settings" {{action "toggleDisplaySettings"}}></i>
+        <div class="chat-window-display-user-screens-and-videos-icon">
+          <i class="ii ii-people" {{action "selectUsersList"}}></i>
+          <span class="chat-window-users-count">
+            {{numberOfUsers}}
+          </span>
+        </div>
+
+        <div class="chat-window-settings-icon">
+          <i class="ii ii-settings" {{action "toggleDisplaySettings"}}></i>
+        </div>
       </div>
 
     </div>
