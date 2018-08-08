@@ -3,6 +3,11 @@
 {{log "roomname" roomname}}
 {{log "username" username}} --}}
 
+{{!-- TODO:
+Fix routing for application/route (redirect on init)
+Figure out how to start rtcMultiConnection after pressing Continue at http://localhost:4200/chat
+Verify websocket server is valid and open for handshakes. --}}
+
 {{#if activeServerHasNoUser}}
 <div class="channel-form">
   <div class="channel-form-username">
