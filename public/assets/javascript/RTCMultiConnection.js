@@ -1000,7 +1000,7 @@
         };
 
         connection.switchStream = function(session) {
-            // TODO: console.log("RTCMultiConnection switchStream", session);
+            console.log("RTCMultiConnection switchStream", session);
             if (connection.numberOfConnectedUsers <= 0) {
                 // no connections
                 setTimeout(function() {
@@ -1016,6 +1016,7 @@
 
         // www.RTCMultiConnection.org/docs/sendCustomMessage/
         connection.sendCustomMessage = function(message) {
+            console.log("RTCMultiConnection sendCustomMessage", message);
             if (!rtcMultiSession || !rtcMultiSession.defaultSocket) {
                 return setTimeout(function() {
                     connection.sendCustomMessage(message);
@@ -1033,6 +1034,7 @@
     };
 
     function RTCMultiSession(connection, callbackForSignalingReady) {
+        console.log("RTCMultiSession", connection, callbackForSignalingReady);
         var socketObjects = {};
         var sockets = [];
         var rtcMultiSession = this;
@@ -1047,6 +1049,7 @@
         var textReceiver = new TextReceiver(connection);
 
         function onDataChannelMessage(e) {
+            console.log("RTCMultiSession onDataChannelMessage", e);
             if (e.data.checkingPresence && connection.channels[e.userid]) {
                 connection.channels[e.userid].send({
                     presenceDetected: true
@@ -1073,6 +1076,7 @@
         }
 
         function onNewSession(session) {
+            console.log("RTCMultiSession onNewSession", session);
             if (connection.skipOnNewSession) return;
 
             if (!session.session) session.session = {};
@@ -1112,6 +1116,7 @@
         }
 
         function updateSocketForLocalStreams(socket) {
+            console.log("RTCMultiSession updateSocketForLocalStreams", socket);
             for (var i = 0; i < connection.localStreamids.length; i++) {
                 var streamid = connection.localStreamids[i];
                 if (connection.streams[streamid]) {
@@ -1123,6 +1128,7 @@
         }
 
         function newPrivateSocket(_config) {
+            console.log("RTCMultiSession newPrivateSocket", _config);
             var socketConfig = {
                 channel: _config.channel,
                 onmessage: socketResponse,
@@ -1164,6 +1170,7 @@
             var isofferer = _config.isofferer,
                 peer;
 
+            console.log("Define peerConfig");
             var peerConfig = {
                 onopen: onChannelOpened,
                 onicecandidate: function(candidate) {
@@ -1445,6 +1452,7 @@
             };
 
             function waitUntilRemoteStreamStartsFlowing(args) {
+                console.log("RTCMultiSession waitUntilRemoteStreamStartsFlowing", args);
                 // chrome for android may have some features missing
                 if (isMobileDevice || isPluginRTC || (isNull(connection.waitUntilRemoteStreamStartsFlowing) || !connection.waitUntilRemoteStreamStartsFlowing)) {
                     return afterRemoteStreamStartedFlowing(args);
@@ -1471,6 +1479,7 @@
             }
 
             function initFakeChannel() {
+                console.log("RTCMultiSession initFakeChannel");
                 if (!connection.fakeDataChannels || connection.channels[_config.userid]) return;
 
                 // for non-data connections; allow fake data sender!
@@ -1495,6 +1504,7 @@
             }
 
             function afterRemoteStreamStartedFlowing(args) {
+                console.log("RTCMultiSession afterRemoteStreamStartedFlowing", args);
                 var mediaElement = args.mediaElement;
                 var session = args.session;
                 var stream = args.stream;
@@ -1558,6 +1568,7 @@
             }
 
             function onChannelOpened(channel) {
+                console.log("RTCMultiSession onChannelOpened", channel);
                 _config.channel = channel;
 
                 // connection.channels['user-id'].send(data);

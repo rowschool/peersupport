@@ -1,0 +1,61 @@
+{{!-- {{log "rtcMultiConnection" rtcMultiConnection}}
+{{log "server" server}}
+{{log "roomname" roomname}}
+{{log "username" username}} --}}
+
+{{#if activeServerHasNoUser}}
+<div class="channel-form">
+  <div class="channel-form-username">
+    <label for="username">Username:</label>
+    {{input
+      classNames="channel-form-input-text"
+      name="username"
+      type="text"
+      value=username
+      placeholder="Username"
+      title="Optional but Recommended!"}}
+  </div>
+</div>
+{{/if}}
+
+{{#unless canDisplayChat}}
+<div class="channel-form">
+    <div class="channel-form-roomname">
+      <label for="roomname">Room Name:</label>
+      {{input
+        classNames="channel-form-input-text"
+        name="roomname"
+        type="text"
+        value=roomname
+        placeholder="Channel Name"
+        title="Channel name (required)"}}
+    </div>
+
+    <div class="channel-form-username">
+      <label for="username">Username:</label>
+      {{input
+        classNames="channel-form-input-text"
+        name="username"
+        type="text"
+        value=username
+        placeholder="Username"
+        title="Optional but Recommended!"}}
+    </div>
+
+    {{#unless fieldsAreEmpty}}
+      <div class="button channel-form-submit" title="Click to join the room!" {{action "continue"}}>
+        Continue
+      </div>
+    {{else}}
+      <div class="channel-form-warning">
+        Some required fields are missing.
+      </div>
+    {{/unless}}
+</div>
+{{/unless}}
+
+{{#if canDisplayChat}}
+  {{skype-clone
+    rtcMultiConnection = rtcMultiConnection
+    roomname = roomname}}
+{{/if}}

@@ -4,6 +4,11 @@ export default Ember.Component.extend({
     // TODO: Make query params contain the channel name.
     // Detect as if going through submit action if URL with query param is passed in
     // Force username if not previously existing
+    queryParams: [{
+        roomname: {
+            type: "string"
+        }
+    }],
 
     // NOTE: The constructor is:
     // window.RTCMultiConnection = function(channel) {
@@ -49,7 +54,9 @@ export default Ember.Component.extend({
 
             // event keycode 13 is "Enter"
             if (event.keyCode === 13) {
-                debugger;
+                // debugger;
+                // console.log("rtcMultiConnection", rtcMultiConnection);
+                // console.log("rtcMultiConnection.blobURLs", rtcMultiConnection.blobURLs)
                 var newMessage = {
                     header: rtcMultiConnection.extra.username,
                     message: window.linkify(newMessageValue),
